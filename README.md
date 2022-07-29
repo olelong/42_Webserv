@@ -30,6 +30,8 @@ Then let's go and try our web server!
 
 #### 1. Parsing the configuration file:
 
+##### The config file 
+
 We must take inspiration from the Nginx configuration files.
 
 The configuration file allows you to retrieve all the necessary information to create our server. 
@@ -106,7 +108,7 @@ There are different methods used in requests, the 3 that we will use in our proj
 - POST, allows you to modify data on the server.
 - DELETE,  allows you to delete data from the server.
 
-An exemple of HTTP request :
+##### Examples of HTTP requests
 
 ![request](./img/request.png)
 
@@ -157,6 +159,8 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 
 
 #### 1. Parser le fichier de configuration :
+
+##### Le fichier de configuration
 
 Nous devons nous inspirer des fichiers de configuration de Nginx.
 
@@ -230,7 +234,7 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 - POST, permet de modifier des données sur le serveur.
 - DELETE, permet de supprimer des données sur le serveur.
 
-Un exemple de requête HTTP :
+##### Exemples de requêtes et réponses HTTP
 
 ![request](./img/request.png)
 
