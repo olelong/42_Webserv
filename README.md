@@ -239,7 +239,7 @@ Exemple avec l'API de Spotify :
 
 Le but est de faire une requête pour accéder à une playlist.
 
-![API](./img/SpotifyAPI1.png)
+<img src="./img/SpotifyAPI1.png" width="300" height="450" />
 
 Nous allons donc utiliser la méthode GET : ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
