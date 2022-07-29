@@ -9,6 +9,8 @@ The goal of the project is to create a web server and to manage the HTTP request
 </br>
 <p align="left"> **************************************************** ENGLISH ******************************************************* </p>
 
+<body>
+
 ### How to make the exercises work: 
 
 ``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
@@ -142,6 +144,7 @@ Response (Cut because it is very long):
 
 </br></br>
 </br></br>
+</body>
 
 <p align="left"> **************************************************** FRANÇAIS ******************************************************* </p>
 
