@@ -32,10 +32,9 @@ Then let's go and try our web server!
 
 We must take inspiration from the Nginx configuration files.
 
+The configuration file allows you to retrieve all the necessary information to create our server. 
 
-The configuration file allows you to retrieve all the necessary information to
-
-create our server.
+It contains mainly the server name, the cgi, the root, the port on which to listen, links to html pages ...
 
 An example of a config file:
 
@@ -110,9 +109,9 @@ Nous devons nous inspirer des fichiers de configuration de Nginx.
 
 Un exemple de fichier de configuration :
 
-Le fichier de configuration permet de récupérer toutes les informations nécessaires pour
+Le fichier de configuration permet de récupérer toutes les informations nécessaires pour créer notre serveur. 
 
-créer notre serveur.
+Il contient principalement le nom du serveur, le cgi, la racine, le port sur lequel écouter, des liens vers des pages html ...
 
 ```cpp
 
