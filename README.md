@@ -116,6 +116,8 @@ The goal is to make a request to access a playlist.
 
 So we will use the GET method: ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
+![API](./img/SpotifyAPI1.png)
+
 Request: 
 
 ```
@@ -123,12 +125,12 @@ curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "
 
 ```
 
+![API2](./img/SpotifyAPI2.png)
+
 Response (Cut because it is very long):
 
-```
+![API3](./img/SpotifyAPI3.png)
 
-
-```
 
 </br></br>
 </br></br>
@@ -237,6 +239,8 @@ Exemple avec l'API de Spotify :
 
 Le but est de faire une requête pour accéder à une playlist.
 
+![API](./img/SpotifyAPI1.png)
+
 Nous allons donc utiliser la méthode GET : ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
 Requête : 
@@ -246,12 +250,13 @@ curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "
 
 ```
 
+![API2](./img/SpotifyAPI2.png)
+
+
 Réponse (Coupée car elle est vraiment longue):
 
-```
+![API3](./img/SpotifyAPI3.png)
 
-
-```
 
 
 </br></br>
