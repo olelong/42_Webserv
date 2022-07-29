@@ -28,7 +28,7 @@ Then let's go and try our web server!
 #### 2. Create a web server:
 #### 3. Manage the HTTP requests and responses:
 
-Exemple of an HTTP request :
+An exemple of HTTP request :
 
 ![request](./img/request.png)
 
