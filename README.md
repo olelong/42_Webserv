@@ -1,44 +1,35 @@
-## Webserv
+# Webserv
 
-# 42_container
+C++, HTML, CSS language
+The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
 
-C++ language
-A Stack, map and vector reimplementation project.
-
+</br>
 <p align="left"> **************************************************** ENGLISH ******************************************************* </p>
 
-### How to make the exercises work : 
-``` git clone "git@github.com:olelong/42_container.git" ```
+### How to make the exercises work: 
+``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
 
-``` cd my_repo_git_name ```
+``` cd repo_git_name ```
 
-Run the ``` make ``` command to run only my ft_container.
+Run the ``` make ``` command to run the server.
 
-Then launch the executable ``` ./ft_containers ```.  
+Launch the executable ``` ./webserv ```.  
 
-##### OR
+Launch your browser google chrome and then type the url: "127.0.0.1:8080"
 
-Run the ``` make real ``` command to run only the stl container.
-
-Then launch the executable ``` ./real ```.  
-
-##### OR
-
-Run the ``` make test ``` command to run both and see the difference beteween them.
-It is normal that the max size is different between the one of my container and the one of the stl.
-
--> You can test differents mains, you just need to change PATH in the makefile:
-
-``` SRCS_DIR	= mains/mine/ ```
-
-``` SRCS		= main_map.cpp ```
+Then let's go and try our web server!
 
 </br></br>
 
-### Stack :
-
-Implement a Stack class taking in parameter of its template our Vector class by default.
-
-#### The specificities of this container :
+### The project is divided into three parts:
 
 
+#### 1. Parsing the configuration file:
+#### 2. Create a web server:
+#### 3. Manage the HTTP requests and responses:
+
+
+</br></br>
+</br></br>
+
+<p align="left"> **************************************************** FRANÇAIS ******************************************************* </p>
