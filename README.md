@@ -102,9 +102,9 @@ and if it fails it will send the client to an error page.
 
 There are different methods used in requests, the 3 that we will use in our project are : 
 
-- GET,
-- POST, 
-- DELETE
+- GET, allows you to request an html file, an image ...
+- POST, allows you to modify data on the server.
+- DELETE,  allows you to delete data from the server.
 
 
 
@@ -193,6 +193,23 @@ comment compiler certaines extensions de fichiers comme les fichiers.py, .php ..
 Nous utilisons la RFC 2616 comme référence pour les codes de statut du serveur qui seront envoyés en réponse au client.
 
 ##### Une requête, qu'est-ce que c'est ?
+
+Lorsque vous êtes sur un site web et que vous cliquez sur un lien sur la page ou que vous essayez d'effectuer une action, 
+
+il envoie une requête au serveur. Le serveur analyse la requête du client et renvoie ensuite une réponse. 
+
+Ainsi, si le client veut accéder à l'onglet "contact" du site, par exemple, 
+
+le serveur renverra le client vers cet onglet en renvoyant le lien vers la page html correspondante. 
+
+et s'il échoue, il enverra le client vers une page d'erreur.
+
+Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous allons utiliser dans notre projet sont : 
+
+- GET, permet de demander un fichier html, une image ...
+- POST, permet de modifier des données sur le serveur.
+- DELETE, permet de supprimer des données sur le serveur.
+
 
 Un exemple de requête HTTP :
 
