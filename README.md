@@ -23,13 +23,15 @@ Launch your browser google chrome and then type the url: "127.0.0.1:8080"
 
 Then let's go and try our web server!
 
-</br>
+</br></br></br>
 
 ### The project is divided into three parts:
 
 #####        1. Parsing the configuration file.
 #####        2. Create a web server
 #####        3. Manage HTTP requests and responses
+
+</br></br></br>
 
 #### 1. Parsing the configuration file:
 
