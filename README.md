@@ -246,7 +246,7 @@ Exemple de simple requête:
 
 Exemple avec l'API de Spotify :
 
-<img src="./img/SpotifyAPI1.png" width="300" height="450" />
+<img src="./img/SpotifyAPI1.png" width="400" height="550" />
 
 Le but est de faire une requête pour accéder à une playlist.
 
