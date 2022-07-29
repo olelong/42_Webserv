@@ -26,7 +26,9 @@ Then let's go and try our web server!
 </br>
 
 ### The project is divided into three parts:
-
+        1. Parsing the configuration file.
+        2. Create a web server
+        3. Manage HTTP requests and responses
 
 #### 1. Parsing the configuration file:
 
