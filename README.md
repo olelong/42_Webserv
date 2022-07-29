@@ -106,11 +106,29 @@ There are different methods used in requests, the 3 that we will use in our proj
 - POST, allows you to modify data on the server.
 - DELETE,  allows you to delete data from the server.
 
-
-
 An exemple of HTTP request :
 
 ![request](./img/request.png)
+
+Exemple with the API of Spotify :
+
+The goal is to make a request to access a playlist.
+
+So we will use the GET method: ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
+
+Request: 
+
+```
+curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQD2O2p5T9DQDVNSF0WJzmaT8IbvnJUxoGjTvSPp67f4WF0YZ2U2fpGScrX8AImvKW1EJ8djPaD-XqKtQpnDMxWg-LRK50YM2MdeTNcpYASqQsVc5jppYBkHKGqK2QELu2RND2J8k21OBqgClgNCwSKOgJMzcsmR17P8C1HA5jOuktySV8XodxPgxtAyKGa5u14zL0fanSv4J1Sy88UNxbsDlaiEj0iPfGC0Sm-HWUN5wLMLfXVB"
+
+```
+
+Response (Cut because it is very long):
+
+```
+
+
+```
 
 </br></br>
 </br></br>
@@ -210,10 +228,31 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 - POST, permet de modifier des données sur le serveur.
 - DELETE, permet de supprimer des données sur le serveur.
 
-
 Un exemple de requête HTTP :
 
 ![request](./img/request.png)
+
+
+Exemple avec l'API de Spotify :
+
+Le but est de faire une requête pour accéder à une playlist.
+
+Nous allons donc utiliser la méthode GET : ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
+
+Requête : 
+
+```
+curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQD2O2p5T9DQDVNSF0WJzmaT8IbvnJUxoGjTvSPp67f4WF0YZ2U2fpGScrX8AImvKW1EJ8djPaD-XqKtQpnDMxWg-LRK50YM2MdeTNcpYASqQsVc5jppYBkHKGqK2QELu2RND2J8k21OBqgClgNCwSKOgJMzcsmR17P8C1HA5jOuktySV8XodxPgxtAyKGa5u14zL0fanSv4J1Sy88UNxbsDlaiEj0iPfGC0Sm-HWUN5wLMLfXVB"
+
+```
+
+Réponse (Coupée car elle est vraiment longue):
+
+```
+
+
+```
+
 
 </br></br>
 </br></br>
