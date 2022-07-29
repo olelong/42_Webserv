@@ -82,6 +82,32 @@ how to compile certain file extensions like files.py, .php ...
 #### 2. Create a web server:
 #### 3. Manage the HTTP requests and responses:
 
+
+##### The RFC, what is it ? 
+
+We use RFC 2616 as a reference for the server status codes that will be sent in response to the client
+
+
+##### What is a request?
+
+When you are on a website and you click on a link on the page or try to do an action, 
+
+it sends a request to the server. The server analyzes the client's request and then sends 
+
+back a response so if the client wants to access the contact tab of the site for example, 
+
+the server will send the client to this tab by sending back the link to the html page linked 
+
+and if it fails it will send the client to an error page.
+
+There are different methods used in requests, the 3 that we will use in our project are : 
+
+- GET,
+- POST, 
+- DELETE
+
+
+
 An exemple of HTTP request :
 
 ![request](./img/request.png)
@@ -161,6 +187,12 @@ comment compiler certaines extensions de fichiers comme les fichiers.py, .php ..
 
 #### 2. Créer un serveur web :
 #### 3. Gérer les requêtes et les réponses HTTP :
+
+##### La RFC, qu'est-ce que c'est ? 
+
+Nous utilisons la RFC 2616 comme référence pour les codes de statut du serveur qui seront envoyés en réponse au client.
+
+##### Une requête, qu'est-ce que c'est ?
 
 Un exemple de requête HTTP :
 
