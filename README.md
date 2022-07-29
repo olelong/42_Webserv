@@ -72,6 +72,13 @@ server {
 
 ```
 
+##### The CGI, what is it ? 
+
+(Common Gateway Interface), is an interface that allows you to tell the compiler 
+
+how to compile certain file extensions like files.py, .php ...
+
+
 #### 2. Create a web server:
 #### 3. Manage the HTTP requests and responses:
 
@@ -145,6 +152,12 @@ server {
 }
 
 ```
+
+##### Le CGI, qu'est ce que c'est ? 
+
+(Common Gateway Interface), est une interface qui vous permet d'indiquer au compilateur 
+
+comment compiler certaines extensions de fichiers comme les fichiers.py, .php ...
 
 #### 2. Créer un serveur web :
 #### 3. Gérer les requêtes et les réponses HTTP :
