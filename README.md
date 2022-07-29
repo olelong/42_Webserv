@@ -148,6 +148,8 @@ Response (Cut because it is very long):
 
 <p align="left"> **************************************************** FRANÇAIS ******************************************************* </p>
 
+<body>
+
 ### Comment faire fonctionner les exercices : 
 
 ``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
@@ -283,3 +285,4 @@ Réponse (Coupée car elle est vraiment longue):
 </br></br>
 </br></br>
 
+</body>
