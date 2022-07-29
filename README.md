@@ -116,7 +116,7 @@ The goal is to make a request to access a playlist.
 
 So we will use the GET method: ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
-![API](./img/SpotifyAPI1.png)
+![API](./img/SpotifyAPI1.png | width=100 height=200)
 
 Request: 
 
