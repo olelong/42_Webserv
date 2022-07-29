@@ -110,15 +110,18 @@ There are different methods used in requests, the 3 that we will use in our proj
 
 ##### Examples of HTTP requests
 
+Exemple of a simple request:
+
 ![request](./img/request.png)
 
-Exemple with the API of Spotify :
+Exemple with the API of Spotify:
+
+<img src="./img/SpotifyAPI1.png" width="400" height="550" />
 
 The goal is to make a request to access a playlist.
 
 So we will use the GET method: ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
-<img src="./img/SpotifyAPI1.png" width="300" height="450" />
 
 Request: 
 
@@ -236,14 +239,16 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 
 ##### Exemples de requêtes et réponses HTTP
 
+Exemple de simple requête:
+
 ![request](./img/request.png)
 
 
 Exemple avec l'API de Spotify :
 
-Le but est de faire une requête pour accéder à une playlist.
-
 <img src="./img/SpotifyAPI1.png" width="300" height="450" />
+
+Le but est de faire une requête pour accéder à une playlist.
 
 Nous allons donc utiliser la méthode GET : ``` GET https://api.spotify.com/v1/playlists/{playlist_id} ```
 
