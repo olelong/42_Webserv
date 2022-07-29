@@ -32,6 +32,11 @@ Then let's go and try our web server!
 
 We must take inspiration from the Nginx configuration files.
 
+
+The configuration file allows you to retrieve all the necessary information to
+
+create our server.
+
 An example of a config file:
 
 ```cpp
@@ -104,6 +109,10 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 Nous devons nous inspirer des fichiers de configuration de Nginx.
 
 Un exemple de fichier de configuration :
+
+Le fichier de configuration permet de récupérer toutes les informations nécessaires pour
+
+créer notre serveur.
 
 ```cpp
 
