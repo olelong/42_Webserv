@@ -87,6 +87,13 @@ how to compile certain file extensions like files.py, .php ...
 
 
 #### 2. Create a web server:
+
+A website can only run if it is hosted on a server. 
+
+If you run the server on localhost or 127.0.0.1:8080, the server will fetch the pages, display them in the browser
+
+and on the browser bar will be written localhost. Localhost means that the site is only accessible on the local machine.
+
 #### 3. Manage the HTTP requests and responses:
 
 
@@ -227,6 +234,14 @@ server {
 comment compiler certaines extensions de fichiers comme les fichiers.py, .php ...
 
 #### 2. Créer un serveur web :
+
+Un site Web peut tourner que s'íl est hébergé sur un serveur. 
+
+Si l'on lance le serveur sur localhost ou sur 127.0.0.1:8080, le serveur récupère les pages, les affichent via le navigateur
+
+et sur la barre du naviagteur sera écrit localhost. Localhost signifie que le site nést accessible que sur la machine locale.
+
+
 #### 3. Gérer les requêtes et les réponses HTTP :
 
 ##### La RFC, qu'est-ce que c'est ? 
