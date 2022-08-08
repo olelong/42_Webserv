@@ -175,9 +175,9 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 
 ### Le projet est divisé en trois parties :
 
-#### Parser le fichier de configuration.
-#### 2. Créer un serveur web.
-#### 3. Gérer les requêtes et les réponses HTTP.
+#### 1 Parser le fichier de configuration.
+#### 2 Créer un serveur web.
+#### 3 Gérer les requêtes et les réponses HTTP.
 
 </br></br></br>
 
