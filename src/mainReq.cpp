@@ -1,29 +1,45 @@
 #include "../include/Request.hpp"
+#include <fstream>
 
 #define CYAN 		"\033[0;36m"
 #define MAGENTA 	"\033[0;35m"
 #define YELLOW 		"\033[0;33m"
 #define END_COLOR 	"\033[0m"
 
-int main(int argc, char *argv[])
-{
-	(void)argv;
-	if (argc > 2)
-	{
-		std::cout << "Error : Too much arguments" << std::endl;
-		return 1;
-	}
+
+void	printTypeReq(ReqType type) {
 	
+	if (type == 0)
+		std::cout << "Type of the request: GET" << std::endl;
+	else if (type == 1)
+		std::cout << "Type of the request: POST" << std::endl;
+	else if (type == 2)
+		std::cout << "Type of the request: DELETE" << std::endl;
+	else if (type == 3)
+		std::cout << "Type of the request: UNKNOWN" << std::endl;
+	else
+		std::cout << "Type of the request: ERROR" << std::endl;
+		
+}
+
+int main(void)
+{
+
 	{
+
 	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl; 
 	std::cout << MAGENTA << "test : fill type of the request" << END_COLOR << std::endl; 
 	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
+	
+	// Print type in the constructor
 	Request req("GET /https");
 	std::cout << "code : " << req.getCode() << std::endl;
 	std::cout << std::endl;
-	Request req1("POST /https");
+	Request req1("POST /https HTTP/1.1");
 	std::cout << std::endl;
-	Request req2("DELETE /https");
+	Request req2("DELETE /http s");
+	std::cout << std::endl;
+	Request req22("DELETE /http HTP/1.1");
 	std::cout << std::endl;
 	Request req3("GETT /https");
 	std::cout << std::endl;
@@ -33,37 +49,186 @@ int main(int argc, char *argv[])
 	Request req5("");
 	std::cout << "code : " << req5.getCode() << std::endl;
 	std::cout << std::endl;
-	std::string str("GET /HTTPS\nHOST: 127.0.1");
-	Request reqq(str);
+	Request reqq("GET /HTTPS\nHOST: 127.0.1");
 	std::cout << "code : " << reqq.getCode() << std::endl;
 	std::cout << std::endl;
-	}
+	
 
-	{
+
+/************************************************************************************************/
+
+		
+	
 	std::cout << MAGENTA << "**********************************" << END_COLOR << std::endl; 
 	std::cout << MAGENTA << "test : fill headers of the request" << END_COLOR << std::endl; 
 	std::cout << MAGENTA << "**********************************" << END_COLOR << std::endl << std::endl; 
 	
-	std::string str("GET /favicon.ico HTTP/1.1\n\
-	Host: 127.0.0.1:8080\n\
-	Connection: keep-alive\n\
-	sec-ch-ua: \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"\n\
-	sec-ch-ua-mobile: ?0\n\
-	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36\n\
-	sec-ch-ua-platform: \"Linux\"\n\
-	Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8\n\
-	Sec-Fetch-Site: same-origin\n\
-	Sec-Fetch-Mode: no-cors\n\
-	Sec-Fetch-Dest: image\n\
-	Referer: http://127.0.0.1:8080/\n\
-	Accept-Encoding: gzip, deflate, br\n\
-	Accept-Language: en-US,en;q=0.9"
-	);
 
-	Request req6(str);
+	std::cout << YELLOW << "Example request:" << END_COLOR << std::endl;
+	std::ifstream ifs("requests/requestSimple");
+	if (!ifs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream buffer;
+	buffer << ifs.rdbuf();
+	Request req6(buffer.str());
 	std::cout << std::endl;	
+	req6.printFillMapHeaders();
 	std::cout << "code : " << req6.getCode() << std::endl;
 	std::cout << std::endl;
+	
+	std::cout << YELLOW << "-----------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Example request without body:" << END_COLOR << std::endl;
+	std::ifstream ifss("requests/requestWithoutBody");
+	if (!ifss)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream bufferr;
+	bufferr << ifss.rdbuf();
+	Request req8(bufferr.str());
+	std::cout << std::endl;	
+	req8.printFillMapHeaders();
+	std::cout << "code : " << req8.getCode() << std::endl;
+	std::cout << std::endl;
+	
+	std::cout << YELLOW << "-----------------------------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Example request Not found Ext in accept Header:" << END_COLOR << std::endl;
+	std::ifstream iifs("requests/requestNotFoundExt");
+	if (!iifs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream buuffer;
+	buuffer << iifs.rdbuf();
+	Request req10(buuffer.str());
+	std::cout << std::endl;	
+	req10.printFillMapHeaders();
+	std::cout << "code : " << req10.getCode() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Example request First HTML:" << END_COLOR << std::endl;
+	std::ifstream iffs("requests/requestFirstHTML");
+	if (!iffs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream buffeer;
+	buffeer << iffs.rdbuf();
+	Request req11(buffeer.str());
+	std::cout << std::endl;	
+	req11.printFillMapHeaders();
+	std::cout << "code : " << req11.getCode() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Example request POST:" << END_COLOR << std::endl;
+	
+	std::cout << std::endl;
+	std::ifstream ifst("requests/requestPost");
+	if (!ifst)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream bbuffer;
+	bbuffer << ifst.rdbuf();
+	Request reeq(bbuffer.str());
+	std::cout << std::endl;	
+	reeq.printFillMapHeaders();
+	std::cout << "code : " << reeq.getCode() << std::endl;
+	std::cout << std::endl;
+	
+
+	std::cout << std::endl;
+
+
+/************************************************************************************************/
+
+
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "     test : Get analysedReq   " << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
+	
+	AnalysedRequest req7 = req6.getAnalysedReq();
+	printTypeReq(req7.type);
+
+	std::cout << "File of the request: " << req7.file << std::endl;
+	std::cout << "Map of essentialHeaders of the request: " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = req7.essentialHeaders.begin(); it != req7.essentialHeaders.end(); it++)
+		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+	std::cout << std::endl << std::endl;
+
+
+	AnalysedRequest req9 = req11.getAnalysedReq();
+	printTypeReq(req9.type);
+	std::cout << "File of the request: " << req9.file << std::endl;
+	std::cout << "Map of essentialHeaders of the request: " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = req9.essentialHeaders.begin(); it != req9.essentialHeaders.end(); it++)
+		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+	std::cout << std::endl;
+
+
+	AnalysedRequest req12 = req10.getAnalysedReq();
+	printTypeReq(req12.type);
+	std::cout << "File of the request: " << req12.file << std::endl;
+	std::cout << "Map of essentialHeaders of the request: " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = req12.essentialHeaders.begin(); it != req12.essentialHeaders.end(); it++)
+		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+	std::cout << std::endl;
+
+	AnalysedRequest req13 = reeq.getAnalysedReq();
+	printTypeReq(req13.type);
+	std::cout << "File of the request: " << req13.file << std::endl;
+	std::cout << "Map of essentialHeaders of the request: " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = req13.essentialHeaders.begin(); it != req13.essentialHeaders.end(); it++)
+		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+	std::cout << std::endl;
+	std::cout << "Body of the request: " << req13.body << std::endl;
+	std::cout << std::endl;
+
+
+/************************************************************************************************/
+
+
+
+	std::cout << std::endl;
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "   test : Create a response    " << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
+
+	req6.createResponse("body nannnfddiogjl "); // 200 OK reponse avec body
+	req8.createResponse(""); // 200 OK
+	req.createResponse("");  // 400 car pas de header accept dans la requete
+
+	req10.createResponse(""); // 200 OK 200 OK 
+
+	}
+
+/************************************************************************************************/
+
+	{
+
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "     test : Parsing error   " << END_COLOR << std::endl; 
+	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
+
+	
+	std::cout << YELLOW << "Header without \":\"" << END_COLOR << std::endl;
+	
+	std::ifstream ifs("requests/requestParsingError");
+	if (!ifs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream buffer;
+	buffer << ifs.rdbuf();
+	Request req(buffer.str());
+	std::cout << std::endl;	
+	req.printFillMapHeaders();
+	std::cout << "code : " << req.getCode() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << ":" << END_COLOR << std::endl;
+	
+
+
+
 	}
 
 	return (0);

@@ -1,0 +1,50 @@
+
+							/**** WEBSERV ****/
+
+TODO:
+
+-	verifier qu il y a bien des headers accept dans chaques methodes d´obligatoire 
+-	leaks
+-	Mettre Code error correspondant
+-	Mettre le body dans un fichier pour CGI pour qu'il puisse le compiler
+-	Decouper en differentes fonctions le constructeur 
+-	POST
+-	DELETE
+
+Parsing error:
+
+-	Pas deux fois le meme header
+-	ignorer q= dans le header accept de GET POST ou DELETE
+-	Si il y a un body dans la requete verifier que c est bien la meme que content-length
+-	Si il y a un body verifie qu'il y a bien un content-length sinon error
+-	type MIME de content-type forcement : type/sous_type
+-	ignorer fin du accept q= pour eviter que si l'on me demande un fichier .q qu il prenne en compte celui la alors que c'en est pas un
+-	pas de headers en doublons
+
+-	headers sans ":" => OK 
+-	requete sans accept header => OK 
+-	cas ou il n y a pas de "." dans le fichier et que c est pas le 1er html => OK
+
+
+--------------------------------------
+
+FINISHED:
+
+-	Differencier les headers du body de la requete => OK
+-	createResponse renvoie code error 400 pour requete de 1ere page html POURQUOI ? pareil pour la derniere du main POURQUOI ? => RESOLU OK 
+-	Remplir le body request / separer headers et body => OK
+-   reverifier check ext car ne fonctionne pas pour find le content type si il est au milieu ou fin d´accept => OK
+-	Error dans le main, dans la partie fill headers of the request
+	1ere requete avec body, error in fill map headers dans le constructor() => OK
+	des qu il y a une ligne vide.
+-	Ajouter "return ;" en cas d'erreur pour s'arreter dans la fonction. => OK normalement
+-	Abort createResponse => OK
+-	Add url dans get dans analyse() si il y en a une => OK
+-	AnalysedReq struct problemes -> OK
+-	Extension check -> content type => OK
+content-type: find extension si il la trouve -> pos - la derniere , ou ; d'avant et si non remplir avec la 1ere proposition  => OK
+-	Analysedequest url, map essential headers  pour GET=> OK
+-	m'occuper de la 1ere page html demande => OK
+ (renvoie le content-type d un text/html)
+ -	content-type: pb rentre toujours dans le if ou il a trouve l'ext alors que normalement non => OK
+ -	Ajouter dans la premiere partie du constructeur de verifier le HTTP/1.1 et qu il y  adonc bien 3 argument dans la premiere ligne => OK

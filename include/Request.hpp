@@ -1,8 +1,10 @@
 
 #include <iostream>
-i#include <sstream>
-#iiinclude <string>
+#include <sstream>
+#include <string>
 #include <map>
+#include "cctype"
+
 
 typedef enum {GET, POST, DELETE, UNKNOWN} ReqType;
 
@@ -22,11 +24,15 @@ class   Request {
 		Request(std::string req);
 		~Request();
 
+		/* Print type and headers  */
+		//void	printFillMapHeaders(Request req);
+		void	printFillMapHeaders(void);
+
 		/* Accesseur */
 		int	getCode();
 
 		/* Return Analyse Request */
-		AnalyseRequest getAnalysedReq(void);
+		AnalysedRequest getAnalysedReq(void);
 
 		/* Create response */
 		std::string	createResponse(std::string body);
@@ -36,24 +42,25 @@ class   Request {
 				
 		// Contiend toute la requete avec comme key le type et sa valeur, le contenu :
 		std::map<std::string, std::string> headers;
+		
 		// Stocke le type de la requete qui sera soit get, post ou delete :
 		ReqType type;
 		int code; // code erreur ex:200 ou 404
+		std::string acceptHeader; // Stocke le contenu du header Accept pour la partie content-type
+
+		static std::map<int, std::string> fillMsgs();
 		static const std::map<int, std::string> statusMsgs; // documentation status code pour mettre la valeur qui va avec le code
-		AnalyseRequest analysedReq;
+		AnalysedRequest analysedReq;
 		
 		/* Analyse Request */
-		AnalysedRequest analyse(void);
+		void analyse(std::string req);
 
 		/* Responses */
 
-		// Fill content type by checking the extension of the url
-		void	checkExt(std::string url);
-		void	fillExt(std::string key, std::string value);
+		// Fill content type by checking the extension of the file
+		std::string	checkFile(std::string url);
+		//void	fillExt(std::string key, std::string value);
 
-
-		// Fill the map for the documentation on status code 
-		// Const because the data will not change
-		// Static because it will be the same for everything for every request
-		void	fillStatusMsgs(void);
+		// UTILS
+		bool isEmpty(std::string line);
 };

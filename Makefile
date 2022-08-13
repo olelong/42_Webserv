@@ -8,7 +8,7 @@ OBJS_D    	= objs/
 OBJS    	= ${SRCS:%.cpp=${OBJS_D}%.o}
 
 #CXX        	= c++
-CXX        = c++ -g3 -fsanitize=address
+CXX        = c++ #-g3 -fsanitize=address
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 RM        	= rm -f
 
