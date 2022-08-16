@@ -65,7 +65,7 @@ int main(void)
 	
 
 	std::cout << YELLOW << "Example request:" << END_COLOR << std::endl;
-	std::ifstream ifs("requests/requestSimple");
+	std::ifstream ifs("requests/simple");
 	if (!ifs)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream buffer;
@@ -79,7 +79,7 @@ int main(void)
 	std::cout << YELLOW << "-----------------------------" << END_COLOR << std::endl;
 	
 	std::cout << YELLOW << "Example request without body:" << END_COLOR << std::endl;
-	std::ifstream ifss("requests/requestWithoutBody");
+	std::ifstream ifss("requests/withoutBody");
 	if (!ifss)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream bufferr;
@@ -93,7 +93,7 @@ int main(void)
 	std::cout << YELLOW << "-----------------------------------------------" << END_COLOR << std::endl;
 	
 	std::cout << YELLOW << "Example request Not found Ext in accept Header:" << END_COLOR << std::endl;
-	std::ifstream iifs("requests/requestNotFoundExt");
+	std::ifstream iifs("requests/NotFoundExt");
 	if (!iifs)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream buuffer;
@@ -107,7 +107,7 @@ int main(void)
 	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
 	
 	std::cout << YELLOW << "Example request First HTML:" << END_COLOR << std::endl;
-	std::ifstream iffs("requests/requestFirstHTML");
+	std::ifstream iffs("requests/firstHTML");
 	if (!iffs)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream buffeer;
@@ -123,7 +123,7 @@ int main(void)
 	std::cout << YELLOW << "Example request POST:" << END_COLOR << std::endl;
 	
 	std::cout << std::endl;
-	std::ifstream ifst("requests/requestPost");
+	std::ifstream ifst("requests/post");
 	if (!ifst)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream bbuffer;
@@ -211,7 +211,7 @@ int main(void)
 	
 	std::cout << YELLOW << "Header without \":\"" << END_COLOR << std::endl;
 	
-	std::ifstream ifs("requests/requestParsingError");
+	std::ifstream ifs("requests/parsingError");
 	if (!ifs)
 		std::cout << "Cannot open the file" << std::endl;
 	std::stringstream buffer;
@@ -222,11 +222,37 @@ int main(void)
 	std::cout << "code : " << req.getCode() << std::endl;
 	std::cout << std::endl;
 
-	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
 	
-	std::cout << YELLOW << ":" << END_COLOR << std::endl;
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Double same Headers in the request:" << END_COLOR << std::endl;
+	
+	std::ifstream ifss("requests/doubleHeaders");
+	if (!ifss)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream buffeer;
+	buffeer << ifss.rdbuf();
+	Request req1(buffeer.str());
+	std::cout << std::endl;	
+	req1.printFillMapHeaders();
+	std::cout << "code : " << req1.getCode() << std::endl;
+	std::cout << std::endl;
 	
 
+	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Content in Accept Header with bad MIME type:" << END_COLOR << std::endl;
+	
+	std::ifstream iffs("requests/badTypeMIME");
+	if (!iffs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream bufffer;
+	bufffer << iffs.rdbuf();
+	Request req2(bufffer.str());
+	std::cout << std::endl;	
+	req2.printFillMapHeaders();
+	std::cout << "code : " << req2.getCode() << std::endl;
+	std::cout << std::endl;
 
 
 	}

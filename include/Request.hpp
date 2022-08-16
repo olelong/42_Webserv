@@ -10,10 +10,10 @@ typedef enum {GET, POST, DELETE, UNKNOWN} ReqType;
 
 typedef struct
 {
-	ReqType	type; // Type of the request
-	std::string file; // File name or path for GET request
-	std::map<std::string, std::string> essentialHeaders; // Store only useful headers
-	std::string body; // If there is in the request a body, store it
+	ReqType	type; 											// Type of the request
+	std::string file; 										// File name or path for GET request
+	std::map<std::string, std::string> essentialHeaders; 	// Store only useful headers
+	std::string body; 										// If there is in the request a body, store it
 }		AnalysedRequest;
 
 class   Request {
@@ -25,42 +25,58 @@ class   Request {
 		~Request();
 
 		/* Print type and headers  */
-		//void	printFillMapHeaders(Request req);
 		void	printFillMapHeaders(void);
 
-		/* Accesseur */
+		/* Accessor */
 		int	getCode();
 
-		/* Return Analyse Request */
+		/* Return Analysed Request */
 		AnalysedRequest getAnalysedReq(void);
 
 		/* Create response */
 		std::string	createResponse(std::string body);
 
 	private :
+
 		/* Requests */
-				
-		// Contiend toute la requete avec comme key le type et sa valeur, le contenu :
-		std::map<std::string, std::string> headers;
-		
-		// Stocke le type de la requete qui sera soit get, post ou delete :
+			/* Variables */
+
+		// Contains all the headers of the request with as key: the type and its value: the content
+		std::map<std::string, std::string> headers;		
+		// Stores the type of the request which will be either GET, POST or DELETE
 		ReqType type;
-		int code; // code erreur ex:200 ou 404
-		std::string acceptHeader; // Stocke le contenu du header Accept pour la partie content-type
+		int code; // Status Code: ex:200 ou 404
+		std::string acceptHeader; // Stores the content of the header accept for the content-type part
+
+			/* Functions used in the constructor */
+		// Fill in type of the request
+		bool	fillTypeReq(std::string line);
+		// Parsing error at first line
+		bool	errorFirstLine(std::string line);
+		// Fill Map Headers
+		bool	fillMapHeaders(std::string req, std::string line);
+		// Fill Map body
+		bool	fillMapBody(std::string req, std::string line);
+		// Check Accept Header's content
+		bool	checkAcceptHeader(void);
+		bool	verifyTypeMime(void);
 
 		static std::map<int, std::string> fillMsgs();
-		static const std::map<int, std::string> statusMsgs; // documentation status code pour mettre la valeur qui va avec le code
+		static const std::map<int, std::string> statusMsgs; // Documentation: To associate the code to its message
 		AnalysedRequest analysedReq;
 		
-		/* Analyse Request */
+		/* Analyze the Request */
 		void analyse(std::string req);
 
 		/* Responses */
 
 		// Fill content type by checking the extension of the file
-		std::string	checkFile(std::string url);
-		//void	fillExt(std::string key, std::string value);
+		std::string	checkFile(std::string file);
+		void		printFile(std::string file, std::string ext);
+		void		ignoreQ(void);
+		std::string manageExt(std::string ext);
 
 		// UTILS
 		bool isEmpty(std::string line);
+		int  stoi(std::string & str);
 };
