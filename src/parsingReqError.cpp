@@ -59,14 +59,29 @@ bool	Request::checkAcceptHeader(void) {
 
 bool	Request::verifyTypeMime(void) {
 
+	// Verify if there is a slash or a comma at the begin of the line:
+	if (this->acceptHeader[0] == ',' || this->acceptHeader[0] == ';' 
+			|| this->acceptHeader[0] == '/') {
+		this->code = 400; // Bad Request
+		std::cout << "PARSING ERROR : Bad type MIME in Header Accept 1" << std::endl;
+		return false;
+	}
+	
+	// Check if there is a previous one before
+	bool sl = false;
+
 	// Count the number of slashes and commas:
 	size_t nbCommas = 0; // Number of comma "," or semicolon ";"
 	size_t nbSlashes = 0; // Number of  slashes
 	for (unsigned int i = 0; this->acceptHeader[i]; i++) {	// Crosses the line
-		if (this->acceptHeader[i] == ',' || this->acceptHeader[i] == ';')  // +1 nbCommas +1 if he finds one
+		if (this->acceptHeader[i] == ',' || this->acceptHeader[i] == ';' ) {  // +1 nbCommas +1 if he finds one
 			nbCommas += 1;
-		if (this->acceptHeader[i] == '/') // +1 nbSlashes if he finds one
+			sl = false;
+		}
+		if (this->acceptHeader[i] == '/' && sl == false ) { // +1 nbSlashes if he finds one
 			nbSlashes += 1;
+			sl = true;
+		}
 	}
 
 	// Store the position of the lastest , and ; to compare both and find the
@@ -97,7 +112,7 @@ bool	Request::verifyTypeMime(void) {
 
 		if (isSlashInLastWord == false) { // Case: Error, did not find a "/" in the last word 
 			this->code = 400; // Bad Request
-			std::cout << "PARSING ERROR : Bad type MIME in Header Accept 1" << std::endl;
+			std::cout << "PARSING ERROR : Bad type MIME in Header Accept 2" << std::endl;
 			return false;
 		}
 	}
@@ -110,15 +125,27 @@ bool	Request::verifyTypeMime(void) {
 	}
 	
 	// Case: only one MIME type:
-	if (nbSlashes == 1 && nbCommas == 0)
-		return true;
-
+	if (nbSlashes == 1 && nbCommas == 0) { 
+		nbSlashes = 0;
+		// Count the right number of slashes if there is no commas:
+		for (unsigned int i = 0; this->acceptHeader[i]; i++) {	// Crosses the line
+			if (this->acceptHeader[i] == '/') // +1 nbSlashes if he finds one
+				nbSlashes += 1;
+		}
+		if (nbSlashes == 1)
+			return true;
+		else {
+			this->code = 400; // Bad Request
+			std::cout << "PARSING ERROR : Bad type MIME in Header Accept 4" << std::endl;
+			return false;
+		}
+	}
+	
 	// Compare the number of slashes with the number of commas:
 	if (nbSlashes != nbCommas) { // Case: Not the same number of "," or ";" and "/"
 		this->code = 400; // Bad Request
-		std::cout << "PARSING ERROR : Bad type MIME in Header Accept 2" << std::endl;
+		std::cout << "PARSING ERROR : Bad type MIME in Header Accept 5" << std::endl;
 		return false;
 	}
-	
 	return true;
 }

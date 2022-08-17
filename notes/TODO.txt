@@ -2,20 +2,6 @@
 
 TODO:
 
--	type MIME : 
-	tests qui passent:
-	//,,
-	salut/hello/machin
-	,salut/hello/machin
-	/salut/hello,machin
-	truc/salut/hello;
-	truc/salut/hello,machin
-	h,salut/hello/machin
-	truc/salut/hello;a
-	a,hey/hello
-	truc/salut/hello,machin;
-	truc/salut/hello,machin;a
-
 
 
 
@@ -61,6 +47,20 @@ q jusqu a la prochaine virgule ou point virgule
 -	=> Enlever le fait que si le fichier n a pas de points que ce soit une erreur
 	car peut ne pas avoir d'extensions => OK on retourne le premier contenu de accept si il y a pas de "."
 
+-	type MIME : 
+	tests qui passent:
+	//,,
+	salut/hello/machin
+	,salut/hello/machin
+	/salut/hello,machin
+	truc/salut/hello;
+	truc/salut/hello,machin
+	h,salut/hello/machin
+	truc/salut/hello;a
+	a,hey/hello
+	truc/salut/hello,machin;
+	truc/salut/hello,machin;a
+	truc/salut/hello,hey,coucou/coincoin
 
 -	Mettre le body dans un fichier pour CGI pour qu'il puisse le compiler : surement dans la partie de wael du coup juste lui renvoyer le body
 
