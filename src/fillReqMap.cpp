@@ -21,6 +21,7 @@ bool	Request::fillTypeReq(std::string line) {
 		this->type = DELETE;
 	else {
 		this->type = UNKNOWN;
+		this->analysedReq.type = this->type;
 		std::cout << "PARSING ERROR : Request type not found" << std::endl;
 		this->code = 405; // Method Not Allowed
 		return false;

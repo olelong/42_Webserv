@@ -14,10 +14,25 @@ std::string	Request::createResponse(std::string body) {
 	response += Request::statusMsgs.at(this->code) + '\n'; // Add code message
 	
 	// Case: Error 426, add if the protocol is not the right one
-	if (this->code == 426) {
+	/*if (this->code == 426) {
 		response += "Upgrade: HTTP/1.1\n";
 		response += "Connection: Upgrade\n";
-	}
+	}*/
+
+	// Display the date
+	response += getDateHeader() + '\n';
+
+	// Add Content-type:
+	response += "Content-Type: ";
+	// Check the file extension and compare it with the header accept content
+	
+	if (this->acceptHeader.size() == 0) // Case: Request received without Accept Header
+		response += "text/html";
+	else
+		response += checkFile(this->analysedReq.file); 
+	response += '\n';
+	// The file does not necessarily contain an extension,
+	// in this case content-type = first content of Accept
 
 	// Display in the answer, the length of the body:
 	// Empty body string if there is no body
@@ -28,21 +43,12 @@ std::string	Request::createResponse(std::string body) {
 		ss1 << content_length;
 		response += ss1.str();
 		response += '\n';
-	
-	// Add Content-type:
-	response += "Content-Type: ";
-	// Check the file extension and compare it with the header accept content
-	response += checkFile(this->analysedReq.file); 
-	response += '\n';
-	// The file does not necessarily contain an extension,
-	// in this case content-type = first content of Accept
-
-
-	// Once the headers are added to the response
-	// We then add the body received
+		
+		// Once the headers are added to the response
+		// We then add the body received
 		response += "\r\n\r\n";
 		response += body;
-	}
+	}	
 
 	// Once the response is complete, 
 	// the server sends the response with the send() function

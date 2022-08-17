@@ -22,7 +22,6 @@ void Request::analyse(std::string req) {
 		return;
 	}
 
-
 	// Fill file with its path or name
 	for (unsigned int i = pos; line[i] != ' ' && line[i]; i++)
 		file.push_back(line[i]);
@@ -33,30 +32,30 @@ void Request::analyse(std::string req) {
 	else if (file.size() > 0) // Other html pages or link requests than the 1st one
 		this->analysedReq.file = file;
 	else {					  // Case: If there is nothing, no files
-		std::cout << "ERROR : in GET request file;" << std::endl;
+		std::cout << "ERROR : in request URI;" << std::endl;
 		this->code = 400; // Bad Request
 					// J'hesite avec 404 Not Found
 		return ;
 	}
 
-	if (this->type == GET) {
-		// Fill the map headers if there is a url after the first line
-		size_t poss = req.find("url");
-		std::string url;
-		if (poss != std::string::npos) { // Check if the "url" header has been found
-			for (unsigned int i = poss + 5; req[i] != '\n' && req[i]; i++) 
-				url += req[i];
-			this->analysedReq.essentialHeaders.insert(std::pair<std::string, std::string>("url", url));
-		}
-	}
-	else if (this->type == POST) {
-		std::cout << "In POST Method" << std::endl;
-	}
-
-	else if (this->type == DELETE) {
-		std::cout << "In DELETE Method" << std::endl;
+	// Fill the map headers if there is a url after the first line
+	size_t poss = req.find("url");
+	std::string url;
+	if (poss != std::string::npos) { // Check if the "url" header has been found
+		for (unsigned int i = poss + 5; req[i] != '\n' && req[i]; i++) 
+			url += req[i];
+		this->analysedReq.essentialHeaders.insert(std::pair<std::string, std::string>("url", url));
 	}
 			
+	// Fill the map headers if there is an Host
+	size_t findHost = req.find("Host");
+	std::string host;
+	if (findHost != std::string::npos) { // Check if the "url" header has been found
+		for (unsigned int i = findHost + 5; req[i] != '\n' && req[i]; i++) 
+			host += req[i];
+		this->analysedReq.essentialHeaders.insert(std::pair<std::string, std::string>("Host", host));
+	}
+	
 	// Print
 	/*	std::cout << std::endl;
 	std::cout << "Print map in analyse() :" << std::endl;

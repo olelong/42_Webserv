@@ -1,0 +1,52 @@
+
+---------------
+PAS A FAIRE :
+---------------
+
+-	Est ce que l'ordre est important dans la reponse ?? est ce que je peux mettre content Type avant content-length par ex?
+	on s en fout 
+
+-	la request-line doit avoir les 3 arguments et ses arguments doivent etre separes seulement par des espaces,
+	pas de CR ou LF. En gros pas de nouvelle ligne entre les elements => je pense que c est gere car je lis ligne par ligne
+	et compare le nombre d'argument et tout => OK mais a tester
+
+-	le client peut envoyer dans la requete une date header que dans une 
+	requete avec un body donc que dans une requete post mais elle n est 
+	pas obligatoire pour le client => ne pas verifier si on l utilise pas
+
+-	body entity present que quand un message-body est present. = on s en fout 
+
+-	Si une requete contient un body-entity, il doit inclure un Content-Type cf.TODO_doc.txt => on s en fout
+
+
+-	(si le request-URI est un PATH absolue donc permet d'identifier la ressource sur le serveur d'origine ou
+	le gateway alors il doit obligatoirement il y avoir la network location de l'URI dans un header Host
+	=> Donc Host header requete obligatoire dans ce cas la)
+
+	(REQUEST-URI : file pas forcement avec un slash 
+		Request-URI    = "*" | absoluteURI | abs_path | authority)
+
+-	REQUEST-URI encoding : "% HEX HEX" decoder le fichier ou alors le serveur peut renvoyer un status code pour invalide request-uris 
+	avec un code approprie => NON on laisse comme c est 
+
+-	Doit on check tous les Accept-Encoding language charset etc pour s'adapter au mieux au cient? => il s en bat les reins
+
+-	Si la request URI est un path absolue, l host fait partie de la request uri donc tout autre
+	host header de la requete doit etre ignoree.
+	
+
+	Si ce n'est pas un absolute path et qu il y a un header host c'est lui qui determine le host.
+	Si l'host determine par l'une des regles au dessus n'est pas valide sur le serveur alors
+	la reponse doit etre une erreur 400 (bad request). => on s en fout
+
+-	Check avec wael reponse header field et request de TODO_doc.txt => I don t know pour le moment on attend 
+
+-	HTTP/1.1 recipients MUST respect the charset label si il y en a un donnee par le client => on s en fout car un charset
+	est souvent le meme genre UTF-8
+
+
+-	Si il y a un content-Type dans la requete, renvoyer le meme dans la reponse? => NON rester comme avant
+
+-	Ajouter Origin header dans struct AnalysedReq ? pour savoir que lest le serveur d'origine => NON a voir plus tard 
+	Peut etre ajouter dans la reponse le header server?
+

@@ -134,6 +134,21 @@ int main(void)
 	std::cout << "code : " << reeq.getCode() << std::endl;
 	std::cout << std::endl;
 	
+	std::cout << YELLOW << "---------------------------" << END_COLOR << std::endl;
+	
+	std::cout << YELLOW << "Example request DELETE:" << END_COLOR << std::endl;
+	
+	std::cout << std::endl;
+	std::ifstream is("requests/delete");
+	if (!is)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream _buffer;
+	_buffer << is.rdbuf();
+	Request _req(_buffer.str());
+	std::cout << std::endl;	
+	_req.printFillMapHeaders();
+	std::cout << "code : " << _req.getCode() << std::endl;
+	std::cout << std::endl;
 
 	std::cout << std::endl;
 
@@ -154,6 +169,8 @@ int main(void)
 		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
 	std::cout << std::endl << std::endl;
 
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 
 	AnalysedRequest req9 = req11.getAnalysedReq();
 	printTypeReq(req9.type);
@@ -164,6 +181,8 @@ int main(void)
 	std::cout << std::endl;
 
 
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 	AnalysedRequest req12 = req10.getAnalysedReq();
 	printTypeReq(req12.type);
 	std::cout << "File of the request: " << req12.file << std::endl;
@@ -172,6 +191,8 @@ int main(void)
 		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
 	std::cout << std::endl;
 
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 	AnalysedRequest req13 = reeq.getAnalysedReq();
 	printTypeReq(req13.type);
 	std::cout << "File of the request: " << req13.file << std::endl;
@@ -182,6 +203,18 @@ int main(void)
 	std::cout << "Body of the request: " << req13.body << std::endl;
 	std::cout << std::endl;
 
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
+	
+	AnalysedRequest req14 = _req.getAnalysedReq();
+	printTypeReq(req14.type);
+	std::cout << "File of the request: " << req14.file << std::endl;
+	std::cout << "Map of essentialHeaders of the request: " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = req14.essentialHeaders.begin(); it != req14.essentialHeaders.end(); it++)
+		std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+	std::cout << std::endl;
+	std::cout << "Body of the request: " << req14.body << std::endl;
+	std::cout << std::endl;
 
 /************************************************************************************************/
 
@@ -193,10 +226,21 @@ int main(void)
 	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
 
 	req6.createResponse("body nannnfddiogjl "); // 200 OK reponse avec body
+	
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 	req8.createResponse(""); // 200 OK
+	std::cout << std::endl;
+	
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 	req.createResponse("");  // 400 car pas de header accept dans la requete
-
+	std::cout << std::endl;
+	
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
 	req10.createResponse(""); // 200 OK 200 OK 
+	std::cout << std::endl;
 
 	}
 
@@ -254,6 +298,8 @@ int main(void)
 	std::cout << "code : " << req2.getCode() << std::endl;
 	std::cout << std::endl;
 
+	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;
+	
 
 	}
 

@@ -1,62 +1,25 @@
-
 							/**** WEBSERV ****/
 
 TODO:
 
--	=> header accept non obligatoire mais du coup gerer le cas ou il y en a pas pour le content type car
-	dans ce cas le client accepte tous les types donc mettre un par defaut ou un lie a l'extension du fichier si il y en a une?
-	
--	Reponse avec date et heure ? obligatoire dans une reponse sauf cas exceptions cf.TODO_doc.txt
+-	type MIME : 
+	tests qui passent:
+	//,,
+	salut/hello/machin
+	,salut/hello/machin
+	/salut/hello,machin
+	truc/salut/hello;
+	truc/salut/hello,machin
+	h,salut/hello/machin
+	truc/salut/hello;a
+	a,hey/hello
+	truc/salut/hello,machin;
+	truc/salut/hello,machin;a
 
--	la request-line doit avoir les 3 arguments et ses arguments doivent etre separes seulement par des espaces,
-	pas de CR ou LF. En gros pas de nouvelle ligne entre les elements => je pense que c est gere car je lis ligne par ligne
-	et compare le nombre d'argument et tout => OK mais a tester
 
--	le client peut envoyer dans la requete une date header que dans une 
-	requete avec un body donc que dans une requete post mais elle n est 
-	pas obligatoire pour le client
 
--	body entity present que quand un message-body est present.
 
--	Si une requete contient un body-entity, il doit inclure un Content-Type cf.TODO_doc.txt
-
--	si le request-URI est un PATH absolue donc permet d'identifier la ressource sur le serveur d'origine ou
-	le gateway alors il doit obligatoirement il y avoir la network location de l'URI dans un header Host
-	=> Donc Host header requete obligatoire dans ce cas la.
-
--	REQUEST-URI : file pas forcement avec un slash 
-		Request-URI    = "*" | absoluteURI | abs_path | authority
-
--	REQUEST-URI encoding : "% HEX HEX" decoder le fichier ou alors le serveur peut renvoyer un status code pour invalide request-uris 
-	avec un code approprie
-
--	Doit on check tous les Accept-Encoding language charset etc pour s'adapter au mieux au cient?
-
--	Si la request URI est un path absolue, l host fait partie de la request uri donc tout autre
-	host header de la requete doit etre ignoree.
-	Si ce n'est pas un absolute path et qu il y a un header host c'est lui qui determine le host.
-	Si l'host determine par l'une des regles au dessus n'est pas valide sur le serveur alors
-	la reponse doit etre une erreur 400 (bad request).
-
--	Check avec wael reponse header field et request de TODO_doc.txt
-
--	HTTP/1.1 recipients MUST respect the charset label si il y en a un donnee par le client
-
--	Peut etre ajouter dans la reponse le header server?
-
--	Si il y a un content-Type dans la requete, renvoyer le meme dans la reponse?
-
--	Ajouter Origin header dans struct AnalysedReq ? pour savoir que lest le serveur d'origine
-
--	POST : surement utile pour nous qu avec CGI
--	DELETE : surement utile pour nous qu avec CGI
--	CGI : regarder ce qui est interessant a renvoyer a wael pour une requete
-	CGI cf.schema envoye par wael de l'architecture d utilisation de cgi
-
--	Ajouter a ma reponse si il y a des infos supplementaires a montrer 
-	si c est une methode post ou delete
-
--	voir comment remplir les essential headers des autres methodes dans analyse()
+-	CGI cf.schema envoye par wael de l'architecture d utilisation de cgi
 -	Faire pleins de tests
 
 
@@ -64,10 +27,22 @@ TODO:
 
 PARSING ERROR:
 
--	savoir si la ligne accept peut finir par un ; ou non si non rajouter erreur 
 
 -------
 
+PARSING ERROR FINISHED:
+
+
+-	si il y a un header host je l enregistre dans essentialHeaders => OKK
+
+-	=> Regler cas ou il y a qu'un seul type dans acceptHeader ex: text/html => OK
+	=> header accept non obligatoire mais du coup gerer le cas ou il y en a pas pour le content type car
+	dans ce cas le client accepte tous les types donc mettre un par defaut : text/html
+	=> Si il n y a pas de header accept retire l'erreur et mettre content-Type a un type par defaut comme text/html
+
+-	header ne peut pas se terminer par un slash ou une virgule => OK
+-	savoir si la ligne accept peut finir par un ; ou non si non rajouter erreur => on s est dit que pour le moment
+	ce n etait pas une erreur => OK
 -	type MIME de content-type forcement : type/sous_type, 
 	si dans le type MIME il y a pas de slash "/" = ERROR
 	Verifier pour tous les type MIME de ACCEPT => OKKKK 
@@ -97,6 +72,10 @@ q jusqu a la prochaine virgule ou point virgule
 
 FINISHED:
 
+-	mettre pour toutes les methodes l'url dans la struct analysedReq => OK
+-	Si ce n'est pas bon le protocole renvoyer juste une erreur 400 donc revenir en arriere
+-	Reponse avec date et heure ? obligatoire dans une reponse donc a faire
+	=> fonction pour la date faite par Wael => OKKK
 -	Une partie d'analyse peut etre utilisee pour les 3 methodes comme: le type, le file par exemple, j'ai mis juste l'url que pour GET pour l'instant => OK 
 -	Tous les commentaires en anglais et bien ecrit => OK
 -	Mettre Code error correspondant => OK normalement c est bon

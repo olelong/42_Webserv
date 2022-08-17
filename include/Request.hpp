@@ -69,6 +69,10 @@ class   Request {
 		void analyse(std::string req);
 
 		/* Responses */
+		
+		// Get the date by Wael
+		std::string day_of_the_week(std::string dayFormat);
+		std::string getDateHeader(void);
 
 		// Fill content type by checking the extension of the file
 		std::string	checkFile(std::string file);
