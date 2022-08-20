@@ -30,10 +30,8 @@ std::string	Request::checkFile(std::string file) {
 	for (unsigned int i = point + 1; file[i]; i++)
 		ext += file[i];
 	
-
 	// PRINT
 	printFile(file, ext);
-
 
 	// Manage and search in the header accept the MIME type corresponding to the extension
 	contentType = manageExt(ext);
@@ -48,18 +46,27 @@ void	Request::printFile(std::string file, std::string ext) {
 
 /* Function to ignore the "q=*" in the content of accept */
 void	Request::ignoreQ(void) {
-	std::cout << "Accept Header with q=: " << this->acceptHeader << std::endl;
+	std::cout << "Accept Header with *=: " << this->acceptHeader << std::endl;
 	for (std::string::iterator i = this->acceptHeader.begin();
 		i != this->acceptHeader.end(); i++) {
+		size_t nb;
 		size_t q = this->acceptHeader.find("q=");
 		if (q != std::string::npos) {
-			size_t nb = 0;
+			nb = 0;
 			for (unsigned int j = q; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
 				nb++;
 			this->acceptHeader.erase(q, nb + 1);
 		}
+		
+		size_t v = this->acceptHeader.find("v=");
+		if (v != std::string::npos) {
+			nb = 0;
+			for (unsigned int j = v; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
+				nb++;
+			this->acceptHeader.erase(v, nb + 1);
+		}
 	}
-	std::cout << "Accept Header without q=: " << this->acceptHeader << std::endl;
+	std::cout << "Accept Header without *=: " << this->acceptHeader << std::endl;
 }
 
 /* Manage extension */
@@ -88,3 +95,68 @@ std::string Request::manageExt(std::string ext) {
 	}
 	return contentType;
 }
+
+
+
+
+/* Create response */
+std::string	Request::createResponse(std::string body) {
+	
+	int content_length = body.size(); 						// Stock the size of the body
+	std::string response;
+	
+	// Display in the response the status code: ex: "HTTP/1.1 200 OK\n" Content-length ...
+	response += "HTTP/1.1 ";
+	std::stringstream ss; 									// To convert the code to string
+	ss << this->code;
+	response += ss.str() + " ";
+	response += Request::statusMsgs.at(this->code) + '\n'; // Add code message
+	
+	// Case: Error 426, add if the protocol is not the right one
+	/*if (this->code == 426) {
+		response += "Upgrade: HTTP/1.1\n";
+		response += "Connection: Upgrade\n";
+	}*/
+
+	// Display the date
+	response += getDateHeader() + '\n';
+
+	// Add Content-type:
+	response += "Content-Type: ";
+	// Check the file extension and compare it with the header accept content
+	
+	if (this->acceptHeader.size() == 0) // Case: Request received without Accept Header
+		response += "text/html";
+	else
+		response += checkFile(this->analysedReq.file); 
+	response += '\n';
+	// The file does not necessarily contain an extension,
+	// in this case content-type = first content of Accept
+
+	// Display in the answer, the length of the body:
+	// Empty body string if there is no body
+	if (content_length > 0) { // If there is a body
+
+		response += "Content-Length : ";
+		std::stringstream ss1;
+		ss1 << content_length;
+		response += ss1.str();
+		response += '\n';
+		
+		// Once the headers are added to the response
+		// We then add the body received
+		response += "\r\n\r\n";
+		response += body;
+	}	
+
+	// Once the response is complete, 
+	// the server sends the response with the send() function
+
+	// DEBUG : Print the response send to the server
+	std::cout << std::endl << "Response send... : " << std::endl;
+	std::cout << response << std::endl;
+	std::cout << std::endl;
+
+	return response;
+}
+

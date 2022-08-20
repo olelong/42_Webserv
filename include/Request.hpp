@@ -1,10 +1,13 @@
+#ifndef REQUEST_HPP
+#define REQUEST_HPP
 
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <map>
 #include "cctype"
-
+#include "ctime"
+#include "stdlib.h"
 
 typedef enum {GET, POST, DELETE, UNKNOWN} ReqType;
 
@@ -21,6 +24,7 @@ class   Request {
 	public :
 				
 		/* Constructors & Destructors */
+		Request();
 		Request(std::string req);
 		~Request();
 
@@ -38,17 +42,17 @@ class   Request {
 
 	private :
 
-		/* Requests */
+		/* REQUESTS.cpp */
 			/* Variables */
 
 		// Contains all the headers of the request with as key: the type and its value: the content
 		std::map<std::string, std::string> headers;		
+		
 		// Stores the type of the request which will be either GET, POST or DELETE
 		ReqType type;
 		int code; // Status Code: ex:200 ou 404
 		std::string acceptHeader; // Stores the content of the header accept for the content-type part
 
-			/* Functions used in the constructor */
 		// Fill in type of the request
 		bool	fillTypeReq(std::string line);
 		// Parsing error at first line
@@ -61,18 +65,12 @@ class   Request {
 		bool	checkAcceptHeader(void);
 		bool	verifyTypeMime(void);
 
-		static std::map<int, std::string> fillMsgs();
-		static const std::map<int, std::string> statusMsgs; // Documentation: To associate the code to its message
+		// Analyze the Request 
 		AnalysedRequest analysedReq;
-		
-		/* Analyze the Request */
 		void analyse(std::string req);
 
-		/* Responses */
-		
-		// Get the date by Wael
-		std::string day_of_the_week(std::string dayFormat);
-		std::string getDateHeader(void);
+
+		/* RESPONSE.cpp */		
 
 		// Fill content type by checking the extension of the file
 		std::string	checkFile(std::string file);
@@ -80,7 +78,20 @@ class   Request {
 		void		ignoreQ(void);
 		std::string manageExt(std::string ext);
 
-		// UTILS
+
+		/* UTILS.cpp */
+		
 		bool isEmpty(std::string line);
 		int  stoi(std::string & str);
+		
+		// Get the date by Wael
+		std::string day_of_the_week(std::string dayFormat);
+		std::string getDateHeader(void);
+		
+		// Map status code with message
+		static std::map<int, std::string> fillMsgs();
+		static const std::map<int, std::string> statusMsgs; // Documentation: To associate the code to its message
+
 };
+
+#endif // REQUEST_HPP
