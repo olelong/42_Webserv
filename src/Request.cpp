@@ -68,14 +68,33 @@ bool	Request::errorFirstLine(std::string line) {
 		
 		// Check nb_arg
 	// La méthode a déjà était vérifiée avant du coup je met nb_arg directement a 1.
-	int	nb_arg = 1; // To count the number of arguments in the line so need 3
-	for (unsigned int i = 0; line[i]; i++) {
-		if (line[i] == ' ')
-			nb_arg++;
+	int	nb_arg = 0;
+	if (this->type != UNKNOWN)
+		nb_arg = 1; // To count the number of arguments in the line so need 3
+	
+	// si nb_arg == 1 :
+	// Boucle: traverser la ligne
+	// si il y a un espace
+	// retenir position de l'espace pour comparer avec i + 1
+	// pour cas ou deux espaces se suivent
+	// sinon nb_arg +1 si la distance entre deux espaces = 1 et que = '/'
+	// ou que c est plus long
+	// et ensuite si le protocole est bon donc apres un autre espace et bool true
+	// nb_arg +1
+	bool isSpace = false;
+	if (nb_arg == 1) {
+		for (unsigned int i = 0; line[i]; i++) {
+			if (line[i] == ' ' && isSpace == false) {
+				nb_arg++;
+				isSpace = true;
+			}
+			if (line[i] != ' ')
+				isSpace = false;
+		}
 	}
 	if (nb_arg != 3) {
 		this->code = 400; // Bad Request
-		std::cout << "PARSING ERROR : Need three argument in the first line of the request" << std::endl;
+		std::cout << "PARSING ERROR : Need three argument in the first line of the request and have " << nb_arg << std::endl;
 		return false;
 	}
 	return true;
@@ -84,13 +103,13 @@ bool	Request::errorFirstLine(std::string line) {
 // Parsing error in the accept header of the request
 bool	Request::checkAcceptHeader(void) {
 	// Accept header 
-	std::cout << "acceptHeader.size() = " << this->acceptHeader.size() << std::endl;
+	//std::cout << "acceptHeader.size() = " << this->acceptHeader.size() << std::endl;
 	if (this->acceptHeader.size() == 0) {
 		//std::cout << "PARSING ERROR : No header Accept in the request" << std::endl;
 		//this->code = 400; // Bad Request
 		//return false;
 		this->acceptHeader += "text/html";
-		std::cout << "OK: " << this->acceptHeader << std::endl;
+		//std::cout << "OK: " << this->acceptHeader << std::endl;
 	}
 	
 	// Check if the "q=*" is in the accept header to ignore it
@@ -101,6 +120,31 @@ bool	Request::checkAcceptHeader(void) {
 		return false;
 
 	return true;
+}
+
+/* Function to ignore the "q=*" in the content of accept */
+void	Request::ignoreQ(void) {
+//	std::cout << "Accept Header with *=: " << this->acceptHeader << std::endl;
+	for (std::string::iterator i = this->acceptHeader.begin();
+		i != this->acceptHeader.end(); i++) {
+		size_t nb;
+		size_t q = this->acceptHeader.find("q=");
+		if (q != std::string::npos) {
+			nb = 0;
+			for (unsigned int j = q; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
+				nb++;
+			this->acceptHeader.erase(q, nb + 1);
+		}
+		
+		size_t v = this->acceptHeader.find("v=");
+		if (v != std::string::npos) {
+			nb = 0;
+			for (unsigned int j = v; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
+				nb++;
+			this->acceptHeader.erase(v, nb + 1);
+		}
+	}
+//	std::cout << "Accept Header without *=: " << this->acceptHeader << std::endl;
 }
 
 bool	Request::verifyTypeMime(void) {
@@ -289,7 +333,7 @@ bool	Request::fillMapBody(std::string req, std::string line)  {
 		// Check if the content-length exists in the headers of the request
 		std::map<std::string, std::string>::iterator PoscontLen = this->headers.find("Content-Length");
 		if (PoscontLen == this->headers.end()) {
-			std::cout << "PARSING ERROR : a body's content-length Needed" << std::endl;
+			std::cout << "PARSING ERROR : a body's content-length Needed 1" << std::endl;
 			this->code = 411; // Length Required
 			return false;
 		}
@@ -303,22 +347,27 @@ bool	Request::fillMapBody(std::string req, std::string line)  {
 		// Case: the content-length is not equal to the body size
 		size_t contLen = stoi(this->headers.at("Content-Length"));
 		if (contLen  != this->analysedReq.body.size()) {
-			std::cout << "PARSING ERROR : Bad body's content-length" << std::endl;
+			std::cout << "PARSING ERROR : Bad body's content-length 2" << std::endl;
 			// Case: invalid Content-Length
 			this->code = 411; // Length Required
 			return false;
 		}
 
 	}
-/*	else if (!request.eof()) { // Case: where there would be an empty line 
+	else if (!request.eof()) { // Case: where there would be an empty line 
 							   // between the headers
-		std::cout << "PARSING ERROR : Headers needs \":\" " << std::endl;
-		this->code = 400; // Bad Request
-		return false;
+		while (!request.eof()) {
+			std::getline(request, line);
+			if (!isEmpty(line)) {
+				std::cout << "PARSING ERROR : Headers needs \":\" " << std::endl;
+				this->code = 400; // Bad Request
+				return false;
+			}
+		}
 	}
-*/
+
 	// PRINT BODY
-	std::cout << "BODY :" << this->analysedReq.body << std::endl;
+	//std::cout << "BODY :" << this->analysedReq.body << std::endl;
 	
 	return true;
 }
@@ -346,10 +395,11 @@ void Request::analyse(std::string req) {
 	}
 
 	// Fill file with its path or name
-	for (unsigned int i = pos; line[i] != ' ' && line[i]; i++)
+	for (unsigned int i = pos; line[i] != ' ' && line[i]; i++) {
 		file.push_back(line[i]);
-	
-	if (file.size() == 1) {	   // Case: of the 1st html because nothing after the "/"
+		std::cout << "file: " << line[i] << std::endl;
+	}
+	if (file.size() == 1 && file[0] == '/') { // Case: of the 1st html because nothing after the "/"
 		this->analysedReq.file = file;
 	}
 	else if (file.size() > 0) // Other html pages or link requests than the 1st one
@@ -357,7 +407,6 @@ void Request::analyse(std::string req) {
 	else {					  // Case: If there is nothing, no files
 		std::cout << "ERROR : in request URI;" << std::endl;
 		this->code = 400; // Bad Request
-					// J'hesite avec 404 Not Found
 		return ;
 	}
 

@@ -16,6 +16,7 @@ std::string	Request::checkFile(std::string file) {
 		}
 		else { // Case: there is no extension, 
 			   // so the content-type is equal to the first one in the header accept
+			ignoreQ();	
 			size_t commas = this->acceptHeader.find(',');
 			size_t pointCom = this->acceptHeader.find(';');
 			size_t nearestCom = pointCom;
@@ -31,7 +32,7 @@ std::string	Request::checkFile(std::string file) {
 		ext += file[i];
 	
 	// PRINT
-	printFile(file, ext);
+//	printFile(file, ext);
 
 	// Manage and search in the header accept the MIME type corresponding to the extension
 	contentType = manageExt(ext);
@@ -42,31 +43,6 @@ std::string	Request::checkFile(std::string file) {
 void	Request::printFile(std::string file, std::string ext) {
 	std::cout << "file: " << file << std::endl;
 	std::cout << "extension: " << ext << std::endl;
-}
-
-/* Function to ignore the "q=*" in the content of accept */
-void	Request::ignoreQ(void) {
-	std::cout << "Accept Header with *=: " << this->acceptHeader << std::endl;
-	for (std::string::iterator i = this->acceptHeader.begin();
-		i != this->acceptHeader.end(); i++) {
-		size_t nb;
-		size_t q = this->acceptHeader.find("q=");
-		if (q != std::string::npos) {
-			nb = 0;
-			for (unsigned int j = q; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
-				nb++;
-			this->acceptHeader.erase(q, nb + 1);
-		}
-		
-		size_t v = this->acceptHeader.find("v=");
-		if (v != std::string::npos) {
-			nb = 0;
-			for (unsigned int j = v; this->acceptHeader[j] != ';' && this->acceptHeader[j] != ',' && j < this->acceptHeader.size(); j++)
-				nb++;
-			this->acceptHeader.erase(v, nb + 1);
-		}
-	}
-	std::cout << "Accept Header without *=: " << this->acceptHeader << std::endl;
 }
 
 /* Manage extension */
@@ -86,7 +62,7 @@ std::string Request::manageExt(std::string ext) {
 		int offset = search - count == 0 ? 0 : 1; //We find the type but it is the first of the header accept, otherwise we are on a comma "," so we must increment 
 		for (size_t i = search - count + offset; this->acceptHeader[i] != ',' && this->acceptHeader[i] != ';' && i < this->acceptHeader.size(); i++)
 			contentType += this->acceptHeader[i];
-		std::cout << this->acceptHeader << std::endl;
+//		std::cout << this->acceptHeader << std::endl;
 	}
 	else { // Case : "ext" not found
 		// Content-type = first MIME type contained in accept	

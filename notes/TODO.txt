@@ -2,8 +2,10 @@
 
 TODO:
 
+-	verifier fichier que j enregistre car je crois que pour un fichier
+	e/e j enregistre que /e?
 
-
+-	met une erreur si apres HTTP/1.1 il y a un espace -> est ce a gerer differemment ou c est bon?
 
 -	CGI cf.schema envoye par wael de l'architecture d utilisation de cgi
 -	Faire pleins de tests
@@ -72,6 +74,20 @@ q jusqu a la prochaine virgule ou point virgule
 
 FINISHED:
 
+-	probleme premiere ligne parse erreur : met erreur quand il y a 3 arguments
+	dont un / au milieu mais n en met pas quand il y en a deux et qu il y a rien 
+	au milieu (que si il y a deux espaces entre le premier et le dernier sinon 
+	met l'erreur) => OK je gere maintenant qu entre les espaces il faut 
+	quelque chose
+-	Si il y a rien apres des headers ou du vide il y a rien a faire mais
+	si il y a pas de body et qu il y a des mots c est une erreur=> OK
+-	Recoit requete valide du client mais mon parsing
+	renvoie une erreur => faire en sorte que ce soit OK
+	S'adapter le plus possible a toutes les requetes.
+	Erreur v= => OKK
+-	; en fin de ligne de header accept finalement pas une erreur => OKK
+-	Mis en commentaire : Regler empty line apres headers quand y
+	a pas de body.=> OKKK
 -	mettre pour toutes les methodes l'url dans la struct analysedReq => OK
 -	Si ce n'est pas bon le protocole renvoyer juste une erreur 400 donc revenir en arriere
 -	Reponse avec date et heure ? obligatoire dans une reponse donc a faire

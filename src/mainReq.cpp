@@ -287,6 +287,7 @@ int main(void)
 	
 	std::cout << YELLOW << "Content in Accept Header with bad MIME type:" << END_COLOR << std::endl;
 	
+	
 	std::ifstream iffs("requests/badTypeMIME");
 	if (!iffs)
 		std::cout << "Cannot open the file" << std::endl;
@@ -300,6 +301,27 @@ int main(void)
 
 	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;
 	
+
+	}
+
+	{
+	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;
+	std::cout << YELLOW << "Differents tests:" << END_COLOR << std::endl;
+	
+	std::ifstream iffs("requests/tests");
+	if (!iffs)
+		std::cout << "Cannot open the file" << std::endl;
+	std::stringstream bufffer;
+	bufffer << iffs.rdbuf();
+	Request req2(bufffer.str());
+	std::cout << std::endl;	
+	req2.printFillMapHeaders();
+	//std::cout << "code : " << req2.getCode() << std::endl;
+	req2.createResponse("oesfdks"); // 200 OK 200 OK 
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;
+
 
 	}
 
