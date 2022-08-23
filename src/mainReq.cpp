@@ -3,7 +3,7 @@
 
 #define CYAN 		"\033[0;36m"
 #define MAGENTA 	"\033[0;35m"
-#define YELLOW 		"\033[0;33m"
+//#define YELLOW 		"\033[0;33m"
 #define END_COLOR 	"\033[0m"
 
 
@@ -225,21 +225,21 @@ int main(void)
 	std::cout << MAGENTA << "   test : Create a response    " << END_COLOR << std::endl; 
 	std::cout << MAGENTA << "*******************************" << END_COLOR << std::endl << std::endl; 
 
-	req6.createResponse("body nannnfddiogjl "); // 200 OK reponse avec body
+	req6.createResponse("body nannnfddiogjl ", -1); // 200 OK reponse avec body
 	
 	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
 	std::cout << std::endl;
-	req8.createResponse(""); // 200 OK
-	std::cout << std::endl;
-	
-	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
-	std::cout << std::endl;
-	req.createResponse("");  // 400 car pas de header accept dans la requete
+	req8.createResponse("", -1); // 200 OK
 	std::cout << std::endl;
 	
 	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
 	std::cout << std::endl;
-	req10.createResponse(""); // 200 OK 200 OK 
+	req.createResponse("", -1);  // 400 car pas de header accept dans la requete
+	std::cout << std::endl;
+	
+	std::cout << YELLOW << "-----------------------------------" << END_COLOR << std::endl;
+	std::cout << std::endl;
+	req10.createResponse("", -1); // 200 OK 200 OK 
 	std::cout << std::endl;
 
 	}
@@ -317,7 +317,7 @@ int main(void)
 	std::cout << std::endl;	
 	req2.printFillMapHeaders();
 	//std::cout << "code : " << req2.getCode() << std::endl;
-	req2.createResponse("oesfdks"); // 200 OK 200 OK 
+	req2.createResponse("oesfdks", -1); // 200 OK 200 OK 
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "--------------------------------------------" << END_COLOR << std::endl;

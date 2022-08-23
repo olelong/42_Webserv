@@ -76,7 +76,7 @@ std::string Request::manageExt(std::string ext) {
 
 
 /* Create response */
-std::string	Request::createResponse(std::string body) {
+std::string	Request::createResponse(std::string body, int code) {
 	
 	int content_length = body.size(); 						// Stock the size of the body
 	std::string response;
@@ -84,6 +84,8 @@ std::string	Request::createResponse(std::string body) {
 	// Display in the response the status code: ex: "HTTP/1.1 200 OK\n" Content-length ...
 	response += "HTTP/1.1 ";
 	std::stringstream ss; 									// To convert the code to string
+	if (code != -1)
+		this->code = code;
 	ss << this->code;
 	response += ss.str() + " ";
 	response += Request::statusMsgs.at(this->code) + '\n'; // Add code message
@@ -117,7 +119,6 @@ std::string	Request::createResponse(std::string body) {
 		std::stringstream ss1;
 		ss1 << content_length;
 		response += ss1.str();
-		response += '\n';
 		
 		// Once the headers are added to the response
 		// We then add the body received

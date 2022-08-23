@@ -32,6 +32,8 @@ std::map<int, std::string> Request::fillMsgs() {
 	tmp.insert(std::pair<int, std::string>(405, "Method Not Allowed"));
 	tmp.insert(std::pair<int, std::string>(411, "Length Required"));
 	tmp.insert(std::pair<int, std::string>(426, "Upgrade Required"));
+	tmp.insert(std::pair<int, std::string>(505, "HTTP Version not supported"));
+	
 	//tmp.insert(std::pair<int, std::string>(401, "Unauthorized"));
 	//tmp.insert(std::pair<int, std::string>(403, "Forbidden"));
 	//tmp.insert(std::pair<int, std::string>(406, "Not Acceptable"));

@@ -1,7 +1,7 @@
 NAME    	= webserv
 
 SRCS_D		= src/
-SRCS   	 	= Request.cpp utilsReq.cpp response.cpp mainReq.cpp
+SRCS   	 	= ServerParser.cpp Request.cpp utilsReq.cpp response.cpp mainReq.cpp
 
 OBJS_D    	= objs/
 OBJS    	= ${SRCS:%.cpp=${OBJS_D}%.o}

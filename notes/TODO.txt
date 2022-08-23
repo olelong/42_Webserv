@@ -2,15 +2,21 @@
 
 TODO:
 
+
+
 -	verifier fichier que j enregistre car je crois que pour un fichier
 	e/e j enregistre que /e?
 
--	met une erreur si apres HTTP/1.1 il y a un espace -> est ce a gerer differemment ou c est bon?
+-	Retirer dand checkfirstline commentaires en trop si tout fonctionne
+
 
 -	CGI cf.schema envoye par wael de l'architecture d utilisation de cgi
 -	Faire pleins de tests
 
-
+-	Si j ai du temps, faire une page html pour tester cgi:
+	mettre un texte python et un logo play pour que quand je
+	clique dessus ca envoie la requete cgi a notre serveur
+	et le client obtient l'output de son code
 
 
 PARSING ERROR:
@@ -73,6 +79,21 @@ q jusqu a la prochaine virgule ou point virgule
 
 
 FINISHED:
+
+-	met une erreur si apres HTTP/1.1 il y a un espace -> est ce a gerer differemment ou c est bon? met une erreur car je met mon p_begin a la position du dernier espace => OK
+-	voir code 505 pour http not supported => OK
+-	Request.hpp createResponse(std::string body, int code = -1);
+	Request.cpp : sans le -1
+	=> le = dans le .hpp veut dire que si on precise
+	pas le code, quand on appelle la fonction il est a -1.
+	Comme un overload de fonction car a la compilation
+	compile soit createResponse(body) soit createResponse(body, code)
+	=> OK a tester
+-	Ajouter dans createResponse que si le code == -1 alors prendre
+	mon code sinon mettre code que wael me donne. => OK a tester
+-	Mettre statusMsg en public => OK
+-	createResponse, je saute une ligne de trop => OK
+
 
 -	probleme premiere ligne parse erreur : met erreur quand il y a 3 arguments
 	dont un / au milieu mais n en met pas quand il y en a deux et qu il y a rien 

@@ -8,6 +8,7 @@
 #include "cctype"
 #include "ctime"
 #include "stdlib.h"
+#include "ServerParser.hpp"
 
 typedef enum {GET, POST, DELETE, UNKNOWN} ReqType;
 
@@ -38,8 +39,10 @@ class   Request {
 		AnalysedRequest getAnalysedReq(void);
 
 		/* Create response */
-		std::string	createResponse(std::string body);
+		std::string	createResponse(std::string body, int code = -1);
 
+		static const std::map<int, std::string> statusMsgs; // Documentation: To associate the code to its message
+	
 	private :
 
 		/* REQUESTS.cpp */
@@ -90,7 +93,6 @@ class   Request {
 		
 		// Map status code with message
 		static std::map<int, std::string> fillMsgs();
-		static const std::map<int, std::string> statusMsgs; // Documentation: To associate the code to its message
 
 };
 

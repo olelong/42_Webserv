@@ -50,25 +50,66 @@ int	Request::getCode() {
 bool	Request::errorFirstLine(std::string line) {
 		
 		// Protocol HTTP/1.1
+	std::vector<std::string> words = getWords(line); // split the line
+	std::cout << "WORDS: " << words.size() << std::endl;
+
 	std::string protocole;
-	size_t p_begin = line.find_last_of(" ");
+	if (words.size() == 3) {
+		// Check Protocol
+		protocole = words[2];
+		std::cout << "protocole: " << protocole << std::endl;
+		if (protocole != "HTTP/1.1") {
+			// Case: This is not the right protocol
+			this->code = 505; // HTTP not supported
+			std::cout << "PARSING ERROR : Protocole is not good, use the HTTP/1.1" << std::endl;
+			return false;
+		}
+		
+		// Fill and check file
+		int lenFile = words[1].size();
+		if (lenFile == 1 && words[1] == "/") { // Case: of the 1st html because nothing after the "/"
+			this->analysedReq.file = words[1];
+		}
+		else if (lenFile > 0) // Other html pages or link requests than the 1st one
+			this->analysedReq.file = words[1];
+		else {					  // Case: If there is nothing, no files
+			std::cout << "ERROR : in request URI;" << std::endl;
+			this->code = 400; // Bad Request
+			return false;
+		}
+		std::cout << "file: " << this->analysedReq.file << std::endl;
+	}
+		// Check nb_arg
+	else { // Case: Wrong number of arg
+		this->code = 400; // Bad Request
+		std::cout << "PARSING ERROR : Need three argument in the first line of the request 1 and have " << words.size() << std::endl;
+		return false;
+	}
+
+
+	/*size_t p_begin = line.find_last_of(" ");
 	if (p_begin == std::string::npos) {
 		std::cout << "PARSING ERROR : Error in find() in the constructor()" << std::endl;
 		this->code = 400; // Bad Request 
 		return false;
 	}
-	for (unsigned int i = p_begin + 1; isprint(line[i]) && line[i]; i++) // Check the HTTP/1.1 protocol
-		protocole.push_back(line[i]);
+	for (unsigned int i = p_begin + 1; isprint(line[i]) && line[i]; i++) { // Check the HTTP/1.1 protocol
+		if (line[i] != ' ')
+			protocole.push_back(line[i]);
+		std::cout << "line[i]: " << line[i] << std::endl;
+	}
+	std::cout << "protocole: " << protocole << std::endl;
 	if (protocole != "HTTP/1.1") {
 		// Case: This is not the right protocol
-		this->code = 400; // Bad request 
+		this->code = 505; // HTTP not supported
 		std::cout << "PARSING ERROR : Protocole is not good, use the HTTP/1.1" << std::endl;
 		return false;
-	}
+	}*/
+
 		
 		// Check nb_arg
 	// La méthode a déjà était vérifiée avant du coup je met nb_arg directement a 1.
-	int	nb_arg = 0;
+	/*int	nb_arg = 0;
 	if (this->type != UNKNOWN)
 		nb_arg = 1; // To count the number of arguments in the line so need 3
 	
@@ -94,9 +135,9 @@ bool	Request::errorFirstLine(std::string line) {
 	}
 	if (nb_arg != 3) {
 		this->code = 400; // Bad Request
-		std::cout << "PARSING ERROR : Need three argument in the first line of the request and have " << nb_arg << std::endl;
+		std::cout << "PARSING ERROR : Need three argument in the first line of the request 2 and have " << nb_arg << std::endl;
 		return false;
-	}
+	}*/
 	return true;
 }
 
@@ -383,23 +424,23 @@ void Request::analyse(std::string req) {
 	std::stringstream tmp(req);
 	std::string line;
 	std::getline(tmp, line);
-	std::string file;
+	//std::string file;
 
 	// Search for the first occurence of "/" in the first line
-	size_t pos = 0;
+	/*size_t pos = 0;
 	pos = line.find("/");
 	if (pos == std::string::npos) { // Check if the "/" has been found 
 		std::cout << "ERROR : / not Found in analyse()" << std::endl;
 		this->code = 400; // Bad Request
 		return;
-	}
+	}*/
 
 	// Fill file with its path or name
-	for (unsigned int i = pos; line[i] != ' ' && line[i]; i++) {
+	/*for (unsigned int i = pos; line[i] != ' ' && line[i]; i++) {
 		file.push_back(line[i]);
 		std::cout << "file: " << line[i] << std::endl;
-	}
-	if (file.size() == 1 && file[0] == '/') { // Case: of the 1st html because nothing after the "/"
+	}*/
+	/*if (file.size() == 1 && file[0] == '/') { // Case: of the 1st html because nothing after the "/"
 		this->analysedReq.file = file;
 	}
 	else if (file.size() > 0) // Other html pages or link requests than the 1st one
@@ -408,7 +449,9 @@ void Request::analyse(std::string req) {
 		std::cout << "ERROR : in request URI;" << std::endl;
 		this->code = 400; // Bad Request
 		return ;
-	}
+	}*/
+
+	// Fill the file in errorFirstLine()
 
 	// Fill the map headers if there is a url after the first line
 	size_t poss = req.find("url");
