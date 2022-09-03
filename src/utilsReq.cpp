@@ -25,22 +25,26 @@ std::map<int, std::string> Request::fillMsgs() {
 	std::map<int, std::string> tmp;
 	
 	tmp.insert(std::pair<int, std::string>(200, "OK"));
+	tmp.insert(std::pair<int, std::string>(201, "Created"));
+	tmp.insert(std::pair<int, std::string>(204, "No Content"));
 	
 	// Client
 	tmp.insert(std::pair<int, std::string>(400, "Bad Request"));
+	tmp.insert(std::pair<int, std::string>(403, "Forbidden"));
 	tmp.insert(std::pair<int, std::string>(404, "Not Found"));
 	tmp.insert(std::pair<int, std::string>(405, "Method Not Allowed"));
 	tmp.insert(std::pair<int, std::string>(411, "Length Required"));
+	tmp.insert(std::pair<int, std::string>(413, "Request Entity Too Large"));
 	tmp.insert(std::pair<int, std::string>(426, "Upgrade Required"));
+	tmp.insert(std::pair<int, std::string>(500, "Internal Server Error"));
+	tmp.insert(std::pair<int, std::string>(501, "Not Implemented"));
 	tmp.insert(std::pair<int, std::string>(505, "HTTP Version not supported"));
 	
 	//tmp.insert(std::pair<int, std::string>(401, "Unauthorized"));
-	//tmp.insert(std::pair<int, std::string>(403, "Forbidden"));
 	//tmp.insert(std::pair<int, std::string>(406, "Not Acceptable"));
 	//tmp.insert(std::pair<int, std::string>(408, "Request Timeout"));
 	//tmp.insert(std::pair<int, std::string>(409, "Conflict"));
 	//tmp.insert(std::pair<int, std::string>(410, "Gone"));
-	//tmp.insert(std::pair<int, std::string>(413, "Payload Too Large"));
 	//tmp.insert(std::pair<int, std::string>(414, "URI Too Long"));
 	//tmp.insert(std::pair<int, std::string>(415, "Unsupported Media Type"));
 	//tmp.insert(std::pair<int, std::string>(417, "Expectation Failed"));
@@ -98,14 +102,3 @@ std::string Request::getDateHeader(void)
 				<< "GMT";
 		return date.str();
 }
-
-/*   PRINT   */
-void	Request::printFillMapHeaders(void) {
-	std::cout << "Request: " << std::endl;
-	std::cout << "Part Fill Headers of request: " << std::endl;
-	for (std::map<std::string,std::string>::iterator it = this->headers.begin(); it != this->headers.end(); it++) {
-		std::cout << "key: " << it->first << " => ";
-		std::cout << "value: " << it->second << std::endl;
-	}
-}
-

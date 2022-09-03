@@ -26,11 +26,9 @@ class   Request {
 				
 		/* Constructors & Destructors */
 		Request();
-		Request(std::string req);
 		~Request();
 
-		/* Print type and headers  */
-		void	printFillMapHeaders(void);
+		bool append(std::string newReqPart);	// returns true if the request is finished
 
 		/* Accessor */
 		int	getCode();
@@ -48,29 +46,35 @@ class   Request {
 		/* REQUESTS.cpp */
 			/* Variables */
 
+		std::string req;
+		unsigned int cptLineBody;
+
 		// Contains all the headers of the request with as key: the type and its value: the content
 		std::map<std::string, std::string> headers;		
-		
 		// Stores the type of the request which will be either GET, POST or DELETE
 		ReqType type;
 		int code; // Status Code: ex:200 ou 404
 		std::string acceptHeader; // Stores the content of the header accept for the content-type part
 
+			/* Functions */
 		// Fill in type of the request
 		bool	fillTypeReq(std::string line);
 		// Parsing error at first line
 		bool	errorFirstLine(std::string line);
 		// Fill Map Headers
-		bool	fillMapHeaders(std::string req, std::string line);
+		bool	fillMapHeaders(std::string line);
 		// Fill Map body
-		bool	fillMapBody(std::string req, std::string line);
+		bool	fillMapBody(std::string line);
 		// Check Accept Header's content
 		bool	checkAcceptHeader(void);
 		bool	verifyTypeMime(void);
 
 		// Analyze the Request 
 		AnalysedRequest analysedReq;
-		void analyse(std::string req);
+		void interpretReq();
+		void analyse();
+
+		void clear();
 
 
 		/* RESPONSE.cpp */		
@@ -93,6 +97,8 @@ class   Request {
 		
 		// Map status code with message
 		static std::map<int, std::string> fillMsgs();
+
+		friend std::ostream& operator<<(std::ostream& os, const Request& req);
 
 };
 

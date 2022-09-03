@@ -11,7 +11,6 @@ std::string	Request::checkFile(std::string file) {
 	if (point == std::string::npos) { 			// Case: "." not found
 		if (file == "/" && file.size() == 1) { 	// Case: 1st html page requested by the client
 			contentType += "text/html";
-			std::cout << "client ask for the 1rst html page" << std::endl;
 			return contentType;
 		}
 		else { // Case: there is no extension, 
@@ -38,11 +37,6 @@ std::string	Request::checkFile(std::string file) {
 	contentType = manageExt(ext);
 
 	return contentType;
-}
-
-void	Request::printFile(std::string file, std::string ext) {
-	std::cout << "file: " << file << std::endl;
-	std::cout << "extension: " << ext << std::endl;
 }
 
 /* Manage extension */
@@ -88,7 +82,9 @@ std::string	Request::createResponse(std::string body, int code) {
 		this->code = code;
 	ss << this->code;
 	response += ss.str() + " ";
-	response += Request::statusMsgs.at(this->code) + '\n'; // Add code message
+	if (Request::statusMsgs.find(this->code) != Request::statusMsgs.end())
+		response += Request::statusMsgs.at(this->code); // Add code message
+	response += "\r\n";
 	
 	// Case: Error 426, add if the protocol is not the right one
 	/*if (this->code == 426) {
@@ -97,25 +93,24 @@ std::string	Request::createResponse(std::string body, int code) {
 	}*/
 
 	// Display the date
-	response += getDateHeader() + '\n';
-
-	// Add Content-type:
-	response += "Content-Type: ";
-	// Check the file extension and compare it with the header accept content
-	
-	if (this->acceptHeader.size() == 0) // Case: Request received without Accept Header
-		response += "text/html";
-	else
-		response += checkFile(this->analysedReq.file); 
-	response += '\n';
-	// The file does not necessarily contain an extension,
-	// in this case content-type = first content of Accept
+	response += getDateHeader() + "\r\n";
 
 	// Display in the answer, the length of the body:
 	// Empty body string if there is no body
 	if (content_length > 0) { // If there is a body
 
-		response += "Content-Length : ";
+		// Add Content-type:
+		response += "Content-Type: ";
+		// Check the file extension and compare it with the header accept content
+	
+		if (this->acceptHeader.size() == 0) // Case: Request received without Accept Header
+			response += "text/html";
+		else
+			response += checkFile(this->analysedReq.file); 
+		response += "\r\n";
+	// The file does not necessarily contain an extension,
+	// in this case content-type = first content of Accept
+		response += "Content-Length: ";
 		std::stringstream ss1;
 		ss1 << content_length;
 		response += ss1.str();
@@ -129,11 +124,5 @@ std::string	Request::createResponse(std::string body, int code) {
 	// Once the response is complete, 
 	// the server sends the response with the send() function
 
-	// DEBUG : Print the response send to the server
-	std::cout << std::endl << "Response send... : " << std::endl;
-	std::cout << response << std::endl;
-	std::cout << std::endl;
-
 	return response;
 }
-

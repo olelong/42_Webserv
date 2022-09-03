@@ -24,7 +24,21 @@ std::vector<std::string> getWords(const std::string& line)
     return words;
 }
 
-
+static void manageSlashes(std::string& path)
+{
+	// Erase following slashes
+	for (size_t i = 1; i < path.size(); i++)
+		if (path[i - 1] == '/' && path[i] == '/') {
+			path.erase(i, 1);
+			i--;
+		}
+	// Add slash at the beginning if absent
+	if (path.find('/') != 0)
+		path.insert(0, "/");
+	// erase all slashes at the end
+	while (path.find_last_of('/') == path.size() - 1 && path.size() > 1)
+		path.erase(path.size() - 1, 1);
+}
 
 bool  ServerParser::parse(std::string configFileName)
 {
@@ -113,14 +127,12 @@ bool  ServerParser::parse(std::string configFileName)
 				newLocation.acceptedMethods.push_back(HttpMethods::POST);
 				newLocation.acceptedMethods.push_back(HttpMethods::DELETE);
 
-				newLocation.bodySize = 1000000; // default max_body_size
 				this->locations.push_back(newLocation);
 				this->locations.back().autoIndex = false;		// this solved error -> unitialized!
 				// IF THERE ARE 3 words, we verify if the path is existed 
 				if (words.size() == 3)
 				{
-					if (words[1].find_last_of('/') == words[1].size() - 1) // removing last / if theres any
-						words[1].erase(words[1].size() - 1, 1);
+					manageSlashes(words[1]);
                     this->locations.back().dir = words[1];
 				
 			/*		std::string pathName = words[1];	
@@ -192,8 +204,7 @@ bool  ServerParser::parse(std::string configFileName)
                         	return false;
                     	}
 
-						if (words[1].find('/') != 0)
-							words[1].insert(0, "/");
+						manageSlashes(words[1]);
                     	this->locations.back().indexes.push_back(words[1].c_str());
 							
 						size_t indexPos = words[1].find(".");
@@ -202,12 +213,12 @@ bool  ServerParser::parse(std::string configFileName)
 							std::cout << "Error! INDEX  file extension is incorrect >>  " << words[1] 	<< std::endl;
 							return (false);
 						}
-						std::string cut = words[1].substr(indexPos);
+						/*std::string cut = words[1].substr(indexPos);
 						if (cut != ".html")
 						{
 							std::cout << "Error! INDEX  file extension is incorrect >>  " << cut 	<< std::endl;
 							return (false);
-						}
+						}*/
 					}
 		
 					// LIMIT_EXCEPT : GET 
@@ -271,11 +282,10 @@ bool  ServerParser::parse(std::string configFileName)
             			}
 						if (words.size() == 2) 
 						{	
-							if (words[1].find_last_of('/') == words[1].size() - 1) // removing last / if theres any
-								words[1].erase(words[1].size() - 1, 1);
+							manageSlashes(words[1]);
                     		this->locations.back().root = words[1];
 				
-							std::string rootPath = words[1];	
+							/*std::string rootPath = words[1];	
 							int fd;
 							if ((fd = open(rootPath.c_str(), O_RDONLY)) == -1)
 							{
@@ -286,24 +296,11 @@ bool  ServerParser::parse(std::string configFileName)
 							{
 								//std::cout << "SUCCESS! we found the rootPath >> " << rootPath  << std::endl;	
 								close(fd); 	// need to close de file descriptor 📙	
-							}
+							}*/
 						}
 					}
 		
 
-					// LOCATION
-					// client max bodysize"
-					else if (words[0] == "client_max_body_size")
-					{
-						real_cpt++;
-						if (words.size() != 2)
-						{
-							std::cout << "Error of number of client_max_body_size! " << std::endl;
-							return (false);
-						}
-						this->locations.back().bodySize = std::strtoul(words[1].c_str(), NULL, 0);
-					}
-					
 					// LOCATION
 					// UPLOAD
 					else if (words[0] == "upload")
@@ -314,6 +311,7 @@ bool  ServerParser::parse(std::string configFileName)
 							std::cout << "Error of number of upload in server! " << std::endl;
 							return (false);
 						}
+						manageSlashes(words[1]);
 						this->locations.back().upload = words[1];
 					}
 
@@ -362,6 +360,7 @@ bool  ServerParser::parse(std::string configFileName)
 								return (false);
 							}
 						}*/
+						manageSlashes(words[2]);
 						this->locations.back().cgi[words[1].c_str()] = words[2];
 					}
 				
@@ -529,7 +528,7 @@ bool  ServerParser::parse(std::string configFileName)
 					return (false);
 				}
 			}
-			if (words[1].find_last_of('/') == words[1].size() - 1) // removing last / if theres any
+			while (words[1].find_last_of('/') == words[1].size() - 1 && words[1].size() > 1)
 				words[1].erase(words[1].size() - 1, 1);
 			this->root = words[1].c_str();
 		}
@@ -570,6 +569,7 @@ bool  ServerParser::parse(std::string configFileName)
 				std::cout << "Error: redefining error page " << words[1] << std::endl;
 				return (false);
 			}
+			manageSlashes(words[2]);
 		  	this->errorPages[errorCode] = words[2];		// WHY ? this is  same as push_back in vector
 			
 			/* LOGIC 
@@ -582,7 +582,7 @@ bool  ServerParser::parse(std::string configFileName)
 					-6. This is the valid code number, but if we didn't define => error
 			*/
 
-			std::string pagePath = words[2];
+			/*std::string pagePath = words[2];
 			int fd;
 			if ((fd = open(pagePath.c_str(), O_RDONLY)) == -1)
 			{
@@ -593,7 +593,7 @@ bool  ServerParser::parse(std::string configFileName)
 			{
 				close(fd);
 			//	std::cout << "SUCCESS! we found the Error_page_path ✨ : " << pagePath << std::endl;
-			/*switch (errorCode)
+			switch (errorCode)
 			{
 				// 400 -> CLIENT CODE ERROR
 				case BAD_REQUEST:
@@ -711,8 +711,8 @@ bool  ServerParser::parse(std::string configFileName)
 						std::cout << "Error! not defined error_pages of http >> " << words[1] << std::endl;
 				//		break ;
 						return (false);
-				}*/ 	// end of switch {}
-			} 		// end -> else {}  when we found a path that existed
+				} 	// end of switch {}
+			}*/ 		// end -> else {}  when we found a path that existed
 
 			// 1) Need to verify if the words[2] finished in .html	
 
@@ -743,13 +743,31 @@ bool  ServerParser::parse(std::string configFileName)
 			{
 				isInsideLocation = false;
 				location_cpt = 0;
-				if (this->locations.back().root.empty()) {
-					std::cout << "Error: there must be a root inside location block" << std::endl;
-					return false;
-				}
+				if (this->locations.back().root.empty())
+					this->locations.back().root = this->locations.back().dir;
 			}
-			else
+			else {
+				for (std::map<int, std::string>::iterator it = this->errorPages.begin();
+						it != this->errorPages.end(); it++) {
+					std::string errorPagePath = this->root + it->second;
+					std::ifstream errorPage(errorPagePath.c_str());
+					if (!errorPage) {
+						std::cout << "Error: can't find the error page \"" << errorPagePath << "\"" <<std::endl;
+						return false;
+					}
+				}
+				for (std::vector<Location>::iterator it = this->locations.begin();
+						it != this->locations.end(); it++) {
+					std::string locRootPath = this->root + it->root;
+					std::ifstream root(locRootPath.c_str());
+					if (!root && it->root != it->dir) {
+						std::cout << "Error: can't find the location root \"";
+						std::cout << locRootPath << "\"!" << std::endl;
+						return false;
+					}
+				}
 				break;
+			}
 		}
 
 		else
@@ -852,8 +870,6 @@ void ServerParser::print()
 			std::cout << WHITE << "[location] Upload is empty" << std::endl;
 		else
 			std::cout << PINK << "Upload : " << this->locations[i].upload << std::endl;
-		if (!(this->locations[i].bodySize == 0))
-			std::cout << GREEN << "Client max body size : " << this->locations[i].bodySize << std::endl;	
 	
 		for (unsigned long j = 0; j < this->locations[i].indexes.size(); j++)
 			std::cout << VIOLET <<  "Index " << j << ": " << this->locations[i].indexes[j] << std::endl;

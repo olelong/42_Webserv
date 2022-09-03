@@ -22,8 +22,8 @@
 #define CYAN	"\033[0;36m"
 #define GREEN	"\033[0;38;5;10m"
 #define WHITE	"\033[0;39m"
+#define YELLOW	"\033[33m"
 #define YELLOW2 "\033[0;38;5;100m"
-#define YELLOW "\033[0;33m"
 #define PINK	"\033[0;38;5;175m"
 #define LIGHTPINK "\033[0;38;5;174m"
 #define LIGHTSEAGREEN "\033[0;38;5;37m"
@@ -102,11 +102,12 @@ class   ServerParser
 
 	static int lineNum;
     int portError();
+
+	std::string servers;					// THE server
 	
 	// Attributes for Server
     int port;   	        				// THE port
 	std::string name;						// THE serverName
-	std::string servers;					// THE server
 	std::string root;						// THE root
 
 	unsigned long bodySize;					// bodyclientmax size! only one!
@@ -119,7 +120,6 @@ class   ServerParser
 		std::string root;
 		std::string upload;						// THE upload
 		std::vector<std::string> indexes;
-		unsigned long bodySize;
 		bool autoIndex;
 		std::vector<HttpMethods::type> acceptedMethods;
 		std::map<std::string, std::string> cgi;			// cgi path need to be located in location
