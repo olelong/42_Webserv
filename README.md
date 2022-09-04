@@ -33,9 +33,9 @@ Then let's go and try our web server!
 
 </br></br></br>
 
-#### 1. Parsing the configuration file:
+### 1. Parsing the configuration file:
 
-##### The config file 
+#### The config file 
 
 We must take inspiration from the Nginx configuration files.
 
@@ -79,14 +79,15 @@ server {
 
 ```
 
-##### The CGI, what is it ? 
+#### The CGI, what is it ? 
 
 (Common Gateway Interface), is an interface that allows you to tell the compiler 
 
 how to compile certain file extensions like files.py, .php ...
 
+</br></br>
 
-#### 2. Create a web server:
+### 2. Create a web server:
 
 A website can only run if it is hosted on a server. 
 
@@ -94,7 +95,21 @@ If you run the server on localhost or 127.0.0.1:8080, the server will fetch the 
 
 and on the browser bar will be written localhost. Localhost means that the site is only accessible on the local machine.
 
-#### 3. Manage the HTTP requests and responses:
+To make our server work, we will use the poll() function which will allow the management between the sockets*. With poll(),
+
+we can know with flags such as POLLIN and POLLOUT if we can read or write on a socket.
+
+We have created a configuration file to test our server, which allows to test multi-servers with
+
+different server_names.
+
+Server_name is useful to know which server we are on but also we can change it in the /etc/hosts file:
+
+
+
+</br></br>
+
+### 3. Manage the HTTP requests and responses:
 
 
 ##### The RFC, what is it ? 
@@ -102,7 +117,7 @@ and on the browser bar will be written localhost. Localhost means that the site 
 We use RFC 2616 as a reference for the server status codes that will be sent in response to the client
 
 
-##### What is a request?
+#### What is a request?
 
 When you are on a website and you click on a link on the page or try to do an action, 
 
@@ -120,7 +135,7 @@ There are different methods used in requests, the 3 that we will use in our proj
 - POST, allows you to modify data on the server.
 - DELETE,  allows you to delete data from the server.
 
-##### Examples of HTTP requests
+#### Examples of HTTP requests
 
 Exemple of a simple request:
 
@@ -245,7 +260,7 @@ Si l'on lance le serveur sur localhost ou sur 127.0.0.1:8080, le serveur récup�
 
 et sur la barre du naviagteur sera écrit localhost. Localhost signifie que le site n'est accessible que sur la machine locale.
 
-Pour faire fonctionner notre serveur, on va utiliser la fonction poll() qui permettra la gestion entre les sockets. Avec poll(),
+Pour faire fonctionner notre serveur, on va utiliser la fonction poll() qui permettra la gestion entre les *sockets. Avec poll(),
 
 on peut savoir avec des flags tels que POLLIN et POLLOUT si l'on peut lire ou écrire sur une socket.
 
@@ -253,13 +268,19 @@ Nous avons créer un fichier de configuration pour tester notre serveur, qui per
 
 diffèrents server_names.
 
-Server_name est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans le fichier /etc/hosts: 
+Server_name* est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans le fichier /etc/hosts: 
 
 ![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
 
 Ci-dessus, on a pu rajouter dans le fichier hosts, notre tabby-website. Ce qui va nous permettre de pouvoir 
 
 accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost même si les autres options sont toujours possibles.
+
+
+#### Vocabulaire:
+
+*socket = un client.
+*server_name = nom attribué a un serveur.
 
 #### Les différents serveurs:
 
