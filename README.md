@@ -111,13 +111,13 @@ Above, we could add in the hosts file, our tabby-website. This will allow us to
 
 access our site via tabby-website instead of 127.0.0.1 or localhost even if the other options are still possible.
 
-##### Vocabulary:
+#### Vocabulary:
 
 *socket = a client. 
 
 *server_name = name assigned to a server.
 
-##### The different servers:
+#### The different servers:
 
 server_name : port
 ![image](https://user-images.githubusercontent.com/58531906/188330437-9aba6334-11ad-47e2-8b30-287b2a4e062f.png)
@@ -141,6 +141,8 @@ so this server returns on error_page Entity too large. Finally, the port 8086, a
 ![image](https://user-images.githubusercontent.com/58531906/188330871-3edf4365-94a9-4aa4-84fc-97ab54f63f4e.png)
 
 ![image](https://user-images.githubusercontent.com/58531906/188330878-d811145e-2c13-4647-9a52-2bf58025206f.png)
+
+- Port 8088 is an empty html page that allows us to stress test our server with siege:
 
 ##### Install siege:
 
