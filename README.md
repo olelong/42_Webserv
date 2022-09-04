@@ -235,6 +235,8 @@ comment compiler certaines extensions de fichiers comme les fichiers.py, .php ..
 
 Pour notre projet nous avons choisis d'utiliser un cgi-php qui nous permettra donc de compiler du php.
 
+</br></br>
+
 ### 2. Créer un serveur web :
 
 Un site Web peut tourner que s'íl est hébergé sur un serveur. 
@@ -309,6 +311,7 @@ siege -b http://localhost:8088
 ![image](https://user-images.githubusercontent.com/58531906/188331183-287e524c-2aec-490d-a1cb-9bfbccb849d8.png)
 
 
+</br></br>
 
 ### 3. Gérer les requêtes et les réponses HTTP :
 
