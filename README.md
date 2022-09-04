@@ -103,7 +103,68 @@ We have created a configuration file to test our server, which allows to test mu
 
 different server_names.
 
-Server_name is useful to know which server we are on but also we can change it in the /etc/hosts file:
+Server_name* is useful to know which server we are on but also we can change it in the /etc/hosts file:
+
+![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
+
+Above, we could add in the hosts file, our tabby-website. This will allow us to
+
+access our site via tabby-website instead of 127.0.0.1 or localhost even if the other options are still possible.
+
+##### Vocabulary:
+
+*socket = a client. 
+
+*server_name = name assigned to a server.
+
+##### The different servers:
+
+server_name : port
+![image](https://user-images.githubusercontent.com/58531906/188330437-9aba6334-11ad-47e2-8b30-287b2a4e062f.png)
+
+- Ports 8080 and 8081 test our website created by @yooyoo75.
+
+- The port 8082 tests the autoindex, that is to say the fact of being able to access in a html page to all documents and files of the root.
+
+- Port 8083 checks if the GET method returns error_pages Method Not Allowed because it has not been added to the list of
+
+accepted methods in the config file.
+
+- Port 8084, 8085 and 8086 test our cgi. On port 8084, we can upload a file in cgi_website/cgi-bin/test.php and
+
+if it is a .php file, compile it via cgi-php. The port 8085 allows to test to upload a file with a body superior to the max_body_size,
+
+so this server returns on error_page Entity too large. Finally, the port 8086, allows to test when it is not possible to upload a file.
+
+- The port 8087 tests the redirections by going to test_redir/redir_from/, we are redirected to /test_redir/redir_to/www/blabla/:
+
+![image](https://user-images.githubusercontent.com/58531906/188330871-3edf4365-94a9-4aa4-84fc-97ab54f63f4e.png)
+
+![image](https://user-images.githubusercontent.com/58531906/188330878-d811145e-2c13-4647-9a52-2bf58025206f.png)
+
+##### Install siege:
+
+```
+mygit_webserv git:(main) ✗ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+eval "$(/mnt/nfs/homes/login/.linuxbrew/bin/brew shellenv)" => example of path to brew
+
+brew install siege
+
+```
+
+##### Utilisation de siege:
+
+```
+
+siege -b http://localhost:8088
+
+```
+
+![image](https://user-images.githubusercontent.com/58531906/188331183-287e524c-2aec-490d-a1cb-9bfbccb849d8.png)
+
+
+</br></br>
 
 
 
@@ -134,6 +195,22 @@ There are different methods used in requests, the 3 that we will use in our proj
 - GET, allows you to request an html file, an image ...
 - POST, allows you to modify data on the server.
 - DELETE,  allows you to delete data from the server.
+
+#### In our project, we handled the requests and responses in the following way:
+
+The request is received end by end by the server then an append() function returns false until the request is
+
+end of the request.
+
+Once the request is received in full, it is parsed and analyzed to check for errors.
+
+In the analysedReq structure is added all the useful elements to the server such as headers, file name ...
+
+This structure is sent and used by the server so that it can later create the body of the response.
+
+The response is created from the analysis of the request and the body given by the server.
+
+This response is then sent to the server via the send() function.
 
 #### Examples of HTTP requests
 
@@ -280,6 +357,7 @@ accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost mê
 #### Vocabulaire:
 
 *socket = un client.
+
 *server_name = nom attribué a un serveur.
 
 #### Les différents serveurs:
