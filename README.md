@@ -257,6 +257,61 @@ Server_name est utile pour savoir sur quel serveur nous sommes mais aussi on peu
 
 ![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
 
+Ci-dessus, on a pu rajouter dans le fichier hosts, notre tabby-website. Ce qui va nous permettre de pouvoir 
+
+accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost même si les autres options sont toujours possibles.
+
+##### Les différents serveurs:
+
+server_name : port
+
+![image](https://user-images.githubusercontent.com/58531906/188330437-9aba6334-11ad-47e2-8b30-287b2a4e062f.png)
+
+- Les ports 8080 et 8081 testent notre website créé par @yooyoo75.
+
+- Le port 8082 teste l'autoindex, c'est à dire le fait de pouvoir accés dans une page html a tous documents et fichiers de la root.
+
+- Le port 8083 check si la méthode GET nous renvoie bien sur error_pages Method Not Allowed car elle n'a pas été rajouté dans la liste des 
+
+méthodes acceptées dans le config file.
+
+- Les port 8084, 8085 et 8086 testent notre cgi. Sur le port 8084, on peut upload un fichier dans cgi_website/cgi-bin/test.php et 
+
+si c'est un .php le compiler via cgi-php. Le port 8085 permet de tester d'upload un fichier avec un body supérieur a la max_body_size,
+
+donc ce serveur renvoie sur error_page Entity too large. Enfin, le port 8086, permet de tester lorsqu'il n'est pas possible d'upload un fichier.
+
+- Le port 8087 teste les redirections en allant dans test_redir/redir_from/, on est redirigé vers /test_redir/redir_to/www/blabla/:
+ 
+![image](https://user-images.githubusercontent.com/58531906/188330871-3edf4365-94a9-4aa4-84fc-97ab54f63f4e.png)
+
+![image](https://user-images.githubusercontent.com/58531906/188330878-d811145e-2c13-4647-9a52-2bf58025206f.png)
+
+- Le port 8088 est une page html vide qui nous permet de stress tester avec siege notre serveur.
+
+##### Pour install siege:
+
+```
+mygit_webserv git:(main) ✗ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+eval "$(/mnt/nfs/homes/login/.linuxbrew/bin/brew shellenv)" => exemple de path vers brew
+
+brew install siege
+
+```
+
+##### Utilisation de siege:
+
+```
+
+siege -b http://localhost:8088
+
+```
+
+![image](https://user-images.githubusercontent.com/58531906/188331183-287e524c-2aec-490d-a1cb-9bfbccb849d8.png)
+
+
+
 #### 3. Gérer les requêtes et les réponses HTTP :
 
 ##### La RFC, qu'est-ce que c'est ? 
