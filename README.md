@@ -255,6 +255,7 @@ diffèrents server_names.
 
 Server_name est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans le fichier /etc/hosts: 
 
+![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
 
 #### 3. Gérer les requêtes et les réponses HTTP :
 
