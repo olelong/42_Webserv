@@ -2,7 +2,7 @@
 
 C++, HTML, CSS language
 
-A trinome project with @ytak and @whazami.
+A trinome project with @ytak/@yooyoo75 and @whazami.
 
 The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
 
