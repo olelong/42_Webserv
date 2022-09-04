@@ -334,6 +334,25 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 - POST, permet de modifier des données sur le serveur.
 - DELETE, permet de supprimer des données sur le serveur.
 
+
+##### Dans notre projet, nous nous sommes occupés des requêtes et réponses de la facon suivante:
+
+La requête est reçue bout par bout par le serveur ensuite une fonction append() renvoie false tant que ce n'est pas la 
+
+fin de la requête.
+
+Une fois la requête reçu entièrement, elle est parsée et analysée pour vérifier qu'il n'y a aucune erreur.
+
+Dans la structure analysedReq est ajoutée tous les élèments utiles au serveur tel que des headers, le nom du fichier ...
+
+Cette structure est envoyée et utilisée par le serveur pour qu'il puisse par la suite créer le body de la réponse.
+
+La réponse est créée à partir de l'analyse de la requête et le body donné par le serveur.
+
+Cette réponse est ensuite envoyée au serveur via la fonction send().
+
+</br>
+
 ##### Exemples de requêtes et réponses HTTP
 
 Exemple de simple requête:
