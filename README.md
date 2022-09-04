@@ -182,9 +182,9 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 </br></br></br>
 
 
-#### 1. Parser le fichier de configuration :
+### 1. Parser le fichier de configuration :
 
-##### Le fichier de configuration
+#### Le fichier de configuration
 
 Nous devons nous inspirer des fichiers de configuration de Nginx.
 
@@ -235,7 +235,7 @@ comment compiler certaines extensions de fichiers comme les fichiers.py, .php ..
 
 Pour notre projet nous avons choisis d'utiliser un cgi-php qui nous permettra donc de compiler du php.
 
-#### 2. Créer un serveur web :
+### 2. Créer un serveur web :
 
 Un site Web peut tourner que s'íl est hébergé sur un serveur. 
 
@@ -259,7 +259,7 @@ Ci-dessus, on a pu rajouter dans le fichier hosts, notre tabby-website. Ce qui v
 
 accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost même si les autres options sont toujours possibles.
 
-##### Les différents serveurs:
+#### Les différents serveurs:
 
 server_name : port
 
@@ -310,13 +310,13 @@ siege -b http://localhost:8088
 
 
 
-#### 3. Gérer les requêtes et les réponses HTTP :
+### 3. Gérer les requêtes et les réponses HTTP :
 
 ##### La RFC, qu'est-ce que c'est ? 
 
 Nous utilisons la RFC 2616 comme référence pour les codes de statut du serveur qui seront envoyés en réponse au client.
 
-##### Une requête, qu'est-ce que c'est ?
+#### Une requête, qu'est-ce que c'est ?
 
 Lorsque vous êtes sur un site web et que vous cliquez sur un lien sur la page ou que vous essayez d'effectuer une action, 
 
@@ -335,7 +335,7 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 - DELETE, permet de supprimer des données sur le serveur.
 
 
-##### Dans notre projet, nous nous sommes occupés des requêtes et réponses de la facon suivante:
+#### Dans notre projet, nous nous sommes occupés des requêtes et réponses de la facon suivante:
 
 La requête est reçue bout par bout par le serveur ensuite une fonction append() renvoie false tant que ce n'est pas la 
 
@@ -353,7 +353,7 @@ Cette réponse est ensuite envoyée au serveur via la fonction send().
 
 </br>
 
-##### Exemples de requêtes et réponses HTTP
+#### Exemples de requêtes et réponses HTTP
 
 Exemple de simple requête:
 
