@@ -247,8 +247,6 @@ Pour faire fonctionner notre serveur, on va utiliser la fonction poll() qui perm
 
 on peut savoir avec des flags tels que POLLIN et POLLOUT si l'on peut lire ou écrire sur une socket.
 
-
-
 Nous avons créer un fichier de configuration pour tester notre serveur, qui permet de tester les multi-serveurs avec
 
 diffèrents server_names.
