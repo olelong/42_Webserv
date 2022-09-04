@@ -233,13 +233,27 @@ server {
 
 comment compiler certaines extensions de fichiers comme les fichiers.py, .php ...
 
+Pour notre projet nous avons choisis d'utiliser un cgi-php qui nous permettra donc de compiler du php.
+
 #### 2. Créer un serveur web :
 
 Un site Web peut tourner que s'íl est hébergé sur un serveur. 
 
 Si l'on lance le serveur sur localhost ou sur 127.0.0.1:8080, le serveur récupère les pages, les affichent via le navigateur
 
-et sur la barre du naviagteur sera écrit localhost. Localhost signifie que le site nést accessible que sur la machine locale.
+et sur la barre du naviagteur sera écrit localhost. Localhost signifie que le site n'est accessible que sur la machine locale.
+
+Pour faire fonctionner notre serveur, on va utiliser la fonction poll() qui permettra la gestion entre les sockets. Avec poll(),
+
+on peut savoir avec des flags tels que POLLIN et POLLOUT si l'on peut lire ou écrire sur une socket.
+
+
+
+Nous avons créer un fichier de configuration pour tester notre serveur, qui permet de tester les multi-serveurs avec
+
+diffèrents server_names.
+
+Server_name est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans le fichier /etc/hosts: 
 
 
 #### 3. Gérer les requêtes et les réponses HTTP :
