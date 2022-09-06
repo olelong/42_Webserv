@@ -441,9 +441,8 @@ Il existe différentes méthodes utilisées dans les requêtes, les 3 que nous a
 
 #### Dans notre projet, nous nous sommes occupés des requêtes et réponses de la facon suivante:
 
-La requête est reçue bout par bout par le serveur ensuite une fonction append() renvoie false tant que ce n'est pas la 
-
-fin de la requête.
+La requête est reçue bout par bout par le serveur ensuite une fonction append() renvoie false tant que ce n'est pas la
+ fin de la requête.
 
 Une fois la requête reçu entièrement, elle est parsée et analysée pour vérifier qu'il n'y a aucune erreur.
 
@@ -475,7 +474,7 @@ Nous allons donc utiliser la méthode GET : ``` GET https://api.spotify.com/v1/p
 Requête : 
 
 ```
-curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQD2O2p5T9DQDVNSF0WJzmaT8IbvnJUxoGjTvSPp67f4WF0YZ2U2fpGScrX8AImvKW1EJ8djPaD-XqKtQpnDMxWg-LRK50YM2MdeTNcpYASqQsVc5jppYBkHKGqK2QELu2RND2J8k21OBqgClgNCwSKOgJMzcsmR17P8C1HA5jOuktySV8XodxPgxtAyKGa5u14zL0fanSv4J1Sy88UNxbsDlaiEj0iPfGC0Sm-HWUN5wLMLfXVB"
+curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer your_token_here"
 
 ```
 
@@ -490,5 +489,11 @@ Réponse (Coupée car elle est vraiment longue):
 
 </br></br>
 </br></br>
+
+Pour conclure, le serveur reçoit des requêtes depuis les sockets des clients. Ces requêtes sont ensuite analysées et la réponse est ainsi 
+
+générées prenant en compte les éléments présents dans le fichier de configuration. Et ainsi notre site s'affiche sur le port 8080.
+
+
 
 </body>
