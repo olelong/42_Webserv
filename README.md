@@ -122,7 +122,12 @@ server_name : port
 
 - Ports 8080 and 8081 test our website created by @yooyoo56.
 
+![image](https://user-images.githubusercontent.com/58531906/188732314-9a47a265-9bcb-4107-9b14-9a69ac5da85c.png)
+![image](https://user-images.githubusercontent.com/58531906/188732369-0b3125bc-4c8a-407e-9890-f3027b60959a.png)
+
 - The port 8082 tests the autoindex, that is to say the fact of being able to access in a html page to all documents and files of the root.
+
+![image](https://user-images.githubusercontent.com/58531906/188732028-6b12437f-1ae1-4d08-8655-2ed5e7e59508.png)
 
 - Port 8083 checks if the GET method returns error_pages Method Not Allowed because it has not been added to the list of
 accepted methods in the config file.
@@ -236,6 +241,9 @@ Response (Cut because it is very long):
 
 To conclude, the server receives requests from the client sockets. These requests are then analyzed and the response is
 generated taking into account the elements present in the configuration file. And so our site is displayed on port 8080.
+
+![image](https://user-images.githubusercontent.com/58531906/188732613-eea8ac1c-0ea6-4f6b-8f7a-0710ab503cd7.png)
+
 
 </br></br>
 </br></br>
@@ -364,7 +372,12 @@ server_name : port
 
 - Les ports 8080 et 8081 testent notre website créé par @yooyoo56.
 
+![image](https://user-images.githubusercontent.com/58531906/188732314-9a47a265-9bcb-4107-9b14-9a69ac5da85c.png)
+![image](https://user-images.githubusercontent.com/58531906/188732369-0b3125bc-4c8a-407e-9890-f3027b60959a.png)
+
 - Le port 8082 teste l'autoindex, c'est à dire le fait de pouvoir accéder dans une page html à tous les documents et fichiers de la root.
+
+![image](https://user-images.githubusercontent.com/58531906/188732091-db0f3317-b6a3-41f3-b4b8-f54fc37460b4.png)
 
 - Le port 8083 check si la méthode GET nous renvoie bien sur error_pages Method Not Allowed car elle n'a pas été rajouté dans la liste des 
 méthodes acceptées dans le config file.
@@ -484,7 +497,10 @@ Réponse (Coupée car elle est vraiment longue):
 
 Pour conclure, le serveur reçoit des requêtes depuis les sockets des clients. Ces requêtes sont ensuite analysées et la réponse est ainsi 
 
-générées prenant en compte les éléments présents dans le fichier de configuration. Et ainsi notre site s'affiche sur le port 8080.
+générées prenant en compte les éléments présents dans le fichier de configuration. Et ainsi notre site s'affiche sur le port 8081.
+
+![image](https://user-images.githubusercontent.com/58531906/188732567-edb2ecfe-4ba8-4025-9e4d-1ef895ecb006.png)
+
 
 </br></br>
 </br></br>
