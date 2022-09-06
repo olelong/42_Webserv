@@ -239,6 +239,8 @@ Response (Cut because it is very long):
 
 ![API3](./img/SpotifyAPI3.png)
 
+</br></br>
+
 To conclude, the server receives requests from the client sockets. These requests are then analyzed and the response is
 generated taking into account the elements present in the configuration file. And so our site is displayed on port 8080.
 
@@ -491,9 +493,7 @@ Réponse (Coupée car elle est vraiment longue):
 
 ![API3](./img/SpotifyAPI3.png)
 
-
-
-
+</br></br>
 
 Pour conclure, le serveur reçoit des requêtes depuis les sockets des clients. Ces requêtes sont ensuite analysées et la réponse est ainsi 
 
