@@ -2,7 +2,7 @@
 
 C++, HTML, CSS language
 
-A trinome project with @ytak/@yooyoo75 and @whazami.
+A trinome project with @ytak/@yooyoo56 and @whazami.
 
 The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
 
@@ -122,7 +122,7 @@ access our site via tabby-website instead of 127.0.0.1 or localhost even if the 
 server_name : port
 ![image](https://user-images.githubusercontent.com/58531906/188330437-9aba6334-11ad-47e2-8b30-287b2a4e062f.png)
 
-- Ports 8080 and 8081 test our website created by @yooyoo75.
+- Ports 8080 and 8081 test our website created by @yooyoo56.
 
 - The port 8082 tests the autoindex, that is to say the fact of being able to access in a html page to all documents and files of the root.
 
@@ -257,9 +257,9 @@ Response (Cut because it is very long):
 
 ``` cd repo_git_name ```
 
-Exécutez la commande ``` make `` pour lancer le serveur.
+Exécutez la commande ``` make ``` pour lancer le serveur.
 
-Lancez l'exécutable `` ./webserv ``.  
+Lancez l'exécutable ``` ./webserv ```.  
 
 Démarrez votre navigateur google chrome et ensuite tapez l'url : "127.0.0.1:8080"
 
@@ -291,13 +291,13 @@ Il contient principalement le nom du serveur, le cgi, la racine, le port sur leq
 ```cpp
 
 server  {
-        server_name yooyoo
+        server_name yoo
 
         client_max_body_size 1000000
 
-         cgi .yooyoo_php php-cgi_ubuntu 
+         cgi php-cgi_ubuntu 
 
-        root http
+        root www
         listen 1232
 
     error_page 404 my_errors/404.html
@@ -313,7 +313,7 @@ server {
         server_name tabby
         listen 8080
 
-        root re
+        root www
         location  / { 
 
         }
@@ -323,11 +323,8 @@ server {
 
 ##### Le CGI, qu'est ce que c'est ? 
 
-(Common Gateway Interface), est une interface qui vous permet d'indiquer au compilateur 
-
-comment compiler certaines extensions de fichiers comme les fichiers.py, .php ...
-
-Pour notre projet nous avons choisis d'utiliser un cgi-php qui nous permettra donc de compiler du php.
+(Common Gateway Interface)
+Le CGI est une passerelle entre notre serveur et un autre service. L'autre service dans notre cas est l'interprétation de fichiers PHP.
 
 </br></br>
 
@@ -335,19 +332,21 @@ Pour notre projet nous avons choisis d'utiliser un cgi-php qui nous permettra do
 
 Un site Web peut tourner que s'íl est hébergé sur un serveur. 
 
-Si l'on lance le serveur sur localhost ou sur 127.0.0.1:8080, le serveur récupère les pages, les affichent via le navigateur
+Si l'on lance le serveur sur 127.0.0.1:8080, le serveur récupère les pages, les affichent via le navigateur. 
 
-et sur la barre du naviagteur sera écrit localhost. Localhost signifie que le site n'est accessible que sur la machine locale.
+Localhost signifie que le site n'est accessible que sur la machine locale.
 
 Pour faire fonctionner notre serveur, on va utiliser la fonction poll() qui permettra la gestion entre les *sockets. Avec poll(),
 
 on peut savoir avec des flags tels que POLLIN et POLLOUT si l'on peut lire ou écrire sur une socket.
 
-Nous avons créer un fichier de configuration pour tester notre serveur, qui permet de tester les multi-serveurs avec
+Nous avons créer un fichier de configuration pour tester notre serveur, qui permet de tester les 
 
-diffèrents server_names.
+multi-serveurs avec diffèrents server_names.
 
-Server_name* est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans le fichier /etc/hosts: 
+Server_name* est utile pour savoir sur quel serveur nous sommes mais aussi on peut changer dans 
+
+le fichier /etc/hosts: 
 
 ![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
 
@@ -358,7 +357,9 @@ accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost mê
 
 #### Vocabulaire:
 
-*socket = un client.
+*socket = un tunnel entre deux machines utilisant un protocole en particulier. 
+
+Dans notre cas, c'est le protocole TCP/IP. Notre serveur a une socket et nos clients en ont une aussi.
 
 *server_name = nom attribué a un serveur.
 
@@ -368,12 +369,11 @@ server_name : port
 
 ![image](https://user-images.githubusercontent.com/58531906/188330437-9aba6334-11ad-47e2-8b30-287b2a4e062f.png)
 
-- Les ports 8080 et 8081 testent notre website créé par @yooyoo75.
+- Les ports 8080 et 8081 testent notre website créé par @yooyoo56.
 
-- Le port 8082 teste l'autoindex, c'est à dire le fait de pouvoir accés dans une page html a tous documents et fichiers de la root.
+- Le port 8082 teste l'autoindex, c'est à dire le fait de pouvoir accéder dans une page html à tous les documents et fichiers de la root.
 
 - Le port 8083 check si la méthode GET nous renvoie bien sur error_pages Method Not Allowed car elle n'a pas été rajouté dans la liste des 
-
 méthodes acceptées dans le config file.
 
 - Les port 8084, 8085 et 8086 testent notre cgi. Sur le port 8084, on peut upload un fichier dans cgi_website/cgi-bin/test.php et 
