@@ -25,13 +25,15 @@ Launch your browser google chrome and then type the url: "127.0.0.1:8080"
 
 Then let's go and try our web server!
 
+</br></br>
+
 ### The project is divided into three parts:
 
 #####        1. Parsing the configuration file.
 #####        2. Create a web server.
 #####        3. Manage HTTP requests and responses.
 
-</br></br></br>
+</br></br>
 
 ### 1. Parsing the configuration file:
 
@@ -109,7 +111,6 @@ Above, we could add in the hosts file, our tabby-website. This will allow us to 
 #### Vocabulary:
 
 *socket = a tunnel between two machines using a particular protocol.
-
 In our case, it is the TCP/IP protocol. Our server has a socket and our clients have one too.
 
 *server_name = name assigned to a server.
@@ -165,7 +166,7 @@ siege -b http://localhost:8088
 
 
 
-</br></br>
+</br>
 
 ### 3. Manage the HTTP requests and responses:
 
@@ -266,7 +267,7 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 #### 2. Créer un serveur web.
 #### 3. Gérer les requêtes et les réponses HTTP.
 
-</br></br></br>
+</br></br>
 
 
 ### 1. Parser le fichier de configuration :
@@ -351,7 +352,6 @@ accéder a notre site via tabby-website au lieu de 127.0.0.1 ou de localhost mê
 #### Vocabulaire:
 
 *socket = un tunnel entre deux machines utilisant un protocole en particulier. 
-
 Dans notre cas, c'est le protocole TCP/IP. Notre serveur a une socket et nos clients en ont une aussi.
 
 *server_name = nom attribué a un serveur.
