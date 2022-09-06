@@ -48,13 +48,13 @@ An example of a config file:
 ```cpp
 
 server  {
-        server_name yooyoo
+        server_name yoo
 
         client_max_body_size 1000000
 
-         cgi .yooyoo_php php-cgi_ubuntu 
+         cgi php-cgi_ubuntu 
 
-        root http
+        root www
         listen 1232
 
     error_page 404 my_errors/404.html
@@ -70,7 +70,7 @@ server {
         server_name tabby
         listen 8080
 
-        root re
+        root www
         location  / { 
 
         }
@@ -81,9 +81,8 @@ server {
 
 #### The CGI, what is it ? 
 
-(Common Gateway Interface), is an interface that allows you to tell the compiler 
+(Common Gateway Interface) The CGI is a gateway between our server and another service. The other service in our case is the interpretation of PHP files.
 
-how to compile certain file extensions like files.py, .php ...
 
 </br></br>
 
@@ -91,29 +90,27 @@ how to compile certain file extensions like files.py, .php ...
 
 A website can only run if it is hosted on a server. 
 
-If you run the server on localhost or 127.0.0.1:8080, the server will fetch the pages, display them in the browser
+If you run the server on 127.0.0.1:8080, the server will fetch the pages, display them in the browser.
 
-and on the browser bar will be written localhost. Localhost means that the site is only accessible on the local machine.
+Localhost means that the site is only accessible on the local machine.
 
 To make our server work, we will use the poll() function which will allow the management between the sockets*. With poll(),
 
 we can know with flags such as POLLIN and POLLOUT if we can read or write on a socket.
 
-We have created a configuration file to test our server, which allows to test multi-servers with
-
-different server_names.
+We have created a configuration file to test our server, which allows to test multi-servers with different server_names.
 
 Server_name* is useful to know which server we are on but also we can change it in the /etc/hosts file:
 
 ![image](https://user-images.githubusercontent.com/58531906/188330200-c657237b-d621-4ccb-8c4a-080daabe51da.png)
 
-Above, we could add in the hosts file, our tabby-website. This will allow us to
-
-access our site via tabby-website instead of 127.0.0.1 or localhost even if the other options are still possible.
+Above, we could add in the hosts file, our tabby-website. This will allow us to access our site via tabby-website instead of 127.0.0.1 or localhost even if the other options are still possible.
 
 #### Vocabulary:
 
-*socket = a client. 
+*socket = a tunnel between two machines using a particular protocol.
+
+In our case, it is the TCP/IP protocol. Our server has a socket and our clients have one too.
 
 *server_name = name assigned to a server.
 
@@ -127,13 +124,11 @@ server_name : port
 - The port 8082 tests the autoindex, that is to say the fact of being able to access in a html page to all documents and files of the root.
 
 - Port 8083 checks if the GET method returns error_pages Method Not Allowed because it has not been added to the list of
-
 accepted methods in the config file.
 
 - Port 8084, 8085 and 8086 test our cgi. On port 8084, we can upload a file in cgi_website/cgi-bin/test.php and
 
 if it is a .php file, compile it via cgi-php. The port 8085 allows to test to upload a file with a body superior to the max_body_size,
-
 so this server returns on error_page Entity too large. Finally, the port 8086, allows to test when it is not possible to upload a file.
 
 - The port 8087 tests the redirections by going to test_redir/redir_from/, we are redirected to /test_redir/redir_to/www/blabla/:
@@ -183,13 +178,9 @@ We use RFC 2616 as a reference for the server status codes that will be sent in 
 #### What is a request?
 
 When you are on a website and you click on a link on the page or try to do an action, 
-
 it sends a request to the server. The server analyzes the client's request and then sends 
-
 back a response so if the client wants to access the contact tab of the site for example, 
-
 the server will send the client to this tab by sending back the link to the html page linked 
-
 and if it fails it will send the client to an error page.
 
 There are different methods used in requests, the 3 that we will use in our project are : 
@@ -232,7 +223,7 @@ So we will use the GET method: ``` GET https://api.spotify.com/v1/playlists/{pla
 Request: 
 
 ```
-curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQD2O2p5T9DQDVNSF0WJzmaT8IbvnJUxoGjTvSPp67f4WF0YZ2U2fpGScrX8AImvKW1EJ8djPaD-XqKtQpnDMxWg-LRK50YM2MdeTNcpYASqQsVc5jppYBkHKGqK2QELu2RND2J8k21OBqgClgNCwSKOgJMzcsmR17P8C1HA5jOuktySV8XodxPgxtAyKGa5u14zL0fanSv4J1Sy88UNxbsDlaiEj0iPfGC0Sm-HWUN5wLMLfXVB"
+curl -X "GET" "https://api.spotify.com/v1/playlists/0vvXsWCC9xrXsKd4FyS8kM" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer your_token_here"
 
 ```
 
@@ -242,6 +233,8 @@ Response (Cut because it is very long):
 
 ![API3](./img/SpotifyAPI3.png)
 
+To conclude, the server receives requests from the client sockets. These requests are then analyzed and the response is
+generated taking into account the elements present in the configuration file. And so our site is displayed on port 8080.
 
 </br></br>
 </br></br>
@@ -487,13 +480,13 @@ Réponse (Coupée car elle est vraiment longue):
 
 
 
-</br></br>
-</br></br>
+
 
 Pour conclure, le serveur reçoit des requêtes depuis les sockets des clients. Ces requêtes sont ensuite analysées et la réponse est ainsi 
 
 générées prenant en compte les éléments présents dans le fichier de configuration. Et ainsi notre site s'affiche sur le port 8080.
 
-
+</br></br>
+</br></br>
 
 </body>
