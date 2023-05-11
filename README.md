@@ -29,9 +29,9 @@ Then let's go and try our web server!
 
 ### The project is divided into three parts:
 
-###        1. Parsing the configuration file.
-###        2. Create a web server.
-###        3. Manage HTTP requests and responses.
+#####        1. Parsing the configuration file.
+#####        2. Create a web server.
+#####        3. Manage HTTP requests and responses.
 
 </br></br>
 
@@ -273,9 +273,9 @@ Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
 
 ### Le projet est divisé en trois parties :
 
-#### 1. Parser le fichier de configuration.
-#### 2. Créer un serveur web.
-#### 3. Gérer les requêtes et les réponses HTTP.
+1. Parser le fichier de configuration.
+2. Créer un serveur web.
+3. Gérer les requêtes et les réponses HTTP.
 
 </br></br>
 
