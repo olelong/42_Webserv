@@ -2,7 +2,7 @@
 
 C++, HTML, CSS language
 
-A trinome project with @ytak/@yooyoo56 and @whazami.
+A trinome project with [Yoojeong Tak](https://github.com/yooyoo56) and [Waël Hazami](https://github.com/whazami).
 
 </br>
 <p align="left"> *************************** ENGLISH *************************** </p>
