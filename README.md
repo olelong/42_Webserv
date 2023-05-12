@@ -4,17 +4,25 @@ C++, HTML, CSS language
 
 A trinome project with @ytak/@yooyoo56 and @whazami.
 
-The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
-
 </br>
-<p align="left"> **************************************************** ENGLISH ******************************************************* </p>
+<p align="left"> *************************** ENGLISH *************************** </p>
 
 <body>
 
-### How to make the exercises work: 
+## The Project:
+        
+The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
+        
+## Prerequisites
+* A Unix-based operating system (for example: Linux, macOS)
+* GNU Make
+        
+## How does it works: 
+Clone the repository:
 
 ``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
 
+Enter in the folder:
 ``` cd repo_git_name ```
 
 Run the ``` make ``` command to run the server.
@@ -246,19 +254,33 @@ generated taking into account the elements present in the configuration file. An
 
 ![image](https://user-images.githubusercontent.com/58531906/188732613-eea8ac1c-0ea6-4f6b-8f7a-0710ab503cd7.png)
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 </br></br>
 </br></br>
 </body>
 
-<p align="left"> **************************************************** FRANÇAIS ******************************************************* </p>
+<p align="left"> *************************** FRANCAIS *************************** </p>
 
 <body>
-
-### Comment faire fonctionner les exercices : 
-
+        
+## Le projet :
+        
+Le but du projet est de créer un serveur web et de gérer les requêtes HTTP et les réponses qu'il reçoit 
+du client.        
+        
+## Prérequis
+* Un système d'exploitation basé sur Unix (par exemple: Linux, macOS)
+* Un GNU Make
+        
+## Comment le faire fonctionner : 
+        
+Clonez le repository:
 ``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
 
+Entrez dans le dossier:        
 ``` cd repo_git_name ```
 
 Exécutez la commande ``` make ``` pour lancer le serveur.
@@ -501,6 +523,9 @@ générées prenant en compte les éléments présents dans le fichier de config
 
 ![image](https://user-images.githubusercontent.com/58531906/188732567-edb2ecfe-4ba8-4025-9e4d-1ef895ecb006.png)
 
+## Licence
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 </br></br>
 </br></br>
