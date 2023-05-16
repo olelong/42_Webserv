@@ -14,7 +14,7 @@ A trinome project with [Yoojeong Tak](https://github.com/yooyoo56) and [Waël Ha
 The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
         
 ## Prerequisites
-* A Unix-based operating system (for example: Linux, macOS)
+* A Unix-based operating system (only Linux)
 * GNU Make
         
 ## How does it works: 
@@ -164,7 +164,7 @@ brew install siege
 
 ```
 
-##### Utilisation de siege:
+##### Utilisation of siege:
 
 ```
 
@@ -272,7 +272,7 @@ Le but du projet est de créer un serveur web et de gérer les requêtes HTTP et
 du client.        
         
 ## Prérequis
-* Un système d'exploitation basé sur Unix (par exemple: Linux, macOS)
+* Un système d'exploitation basé sur Unix (seulement Linux)
 * Un GNU Make
         
 ## Comment le faire fonctionner : 
