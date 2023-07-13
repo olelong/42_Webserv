@@ -234,10 +234,6 @@ generated taking into account the elements present in the configuration file. An
 
 ![image](https://user-images.githubusercontent.com/58531906/188732613-eea8ac1c-0ea6-4f6b-8f7a-0710ab503cd7.png)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 </br></br>
 </br></br>
 </body>
