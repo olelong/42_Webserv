@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/*Nav bar */
+  
+header > div {
+    font-family: 'Poppins';
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px dotted #f2cfcf;
+  }
+  
+  tabby-words {
+    font-family: 'Poppins'
+  }
+
+  nav {
+
+    width: 600px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: black;
+  }
+
+
+/*global*/
+
+body{
+    background-color: #FFE6E6;
+    text-align: center;
+    margin:0;
+}
+
+h1{
+    color: #A685E2;
+    font-size: 5.625rem;
+    font-family: 'Sacramento', cursive;
+    text-align: center;
+}
+
+h2 {
+    color: #FFABE1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: normal;
+    text-align: center;
+    Padding-bottom:10px;
+}
+
+h3 {
+    color: #A685E2;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    Padding-bottom:10px;
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color:#40514E;
+    font-size: 20px;
+    display: inline-block;
+}
+
+/*top container*/
+.top-container{
+background-color: #FFE6E6;
+position: relative;
+padding-top: 50px;
+}
+
+.top-pet {
+    position: absolute;
+    right: 300px;
+    top: 50px;
+}
+
+
+.bottom-pet{
+    left:300px;
+    position:absolute;
+}
+
+.tabby {
+    left:500px;
+}
+
+.tabby3 {
+  max-width: 200px;
+  left:100px;
+}
+
+.tabby2 {
+  max-width: 300px;
+  left:100px;
+}
+
+
+.me {
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    font-weight: bold;
+  }
+  
+  .me-photo {
+    width: 15%;
+  }
+  
+  .me-description {
+    color: #40514E text-align:center;
+    padding-bottom: 40px;
+  }
+
+/*second container*/
+.second-container{
+    background-color: #FFE6E6;
+    padding-top:50px;
+    margin:0;
+    padding-bottom:100px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+.second-container ul{
+    color:#A685E2;
+}
+.bold-description{
+    font-size:22px;
+    font-weight: bold;
+}
+
+hr {
+    border: dotted #A685E2 5px;
+    border-bottom: none;
+    width:3%;
+}
+
+.info{
+    padding:20px;
+}
+
+#keyboard{
+    display: inline-block;
+    width: 10px;
+}
+
+#game{
+    box-shadow: 10px 10px 15px #FFE6E6;  
+}
+
+.keyboard{
+    width:200px;
+    height: 100px;
+}
+
+
+.span{
+    font-weight: bold;
+}
+
+.skills {
+    background-color: white;
+  }
+  
+  .skill-row {
+    background-color: white;
+  }
+  
+
+  .pet-food {
+    padding:30px;
+    position: relative;
+    
+  }
+  
+  .blackcat2-photo {
+    left:300px;
+    position:absolute;
+  }
+  
+  .cake {
+    width: 30%;
+    margin: auto;
+    text-align: left;
+  }
+  
+  .cake-photo {
+    position: absolute;
+    right: 300px;
+    bottom: 50px;
+  }
+  
+  .contact-me {
+    width: 100%;
+    padding-bottom: 40px;
+  }
+  
+  .contact-love {
+    text-align: center;
+    Width:45%;
+    margin: 40px auto 60px;
+  
+  }
+  
+  .btn {
+    background-color: #A685E2;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .bottom-container {
+    background-color: #A685E2;
+    padding: 20px 0;
+  }
+  
+  .copyrights {
+    padding: 20px 0;
+    color: white;
+    font-size: 0.75rem;
+  }
+  
+  a:active {
+    color:white;
+  }
