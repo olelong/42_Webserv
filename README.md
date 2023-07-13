@@ -12,26 +12,6 @@ A trinome project with [Yoojeong Tak](https://github.com/yooyoo56) and [Waël Ha
 ## The Project:
         
 The goal of the project is to create a web server and to manage the HTTP requests and responses it receives from the client.
-        
-## Prerequisites
-* A Unix-based operating system (only Linux)
-* GNU Make
-        
-## How does it works: 
-Clone the repository:
-
-``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
-
-Enter in the folder:
-``` cd repo_git_name ```
-
-Run the ``` make ``` command to run the server.
-
-Launch the executable ``` ./webserv ```.  
-
-Launch your browser google chrome and then type the url: "127.0.0.1:8080"
-
-Then let's go and try our web server!
 
 </br></br>
 
@@ -271,26 +251,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Le but du projet est de créer un serveur web et de gérer les requêtes HTTP et les réponses qu'il reçoit 
 du client.        
         
-## Prérequis
-* Un système d'exploitation basé sur Unix (seulement Linux)
-* Un GNU Make
-        
-## Comment le faire fonctionner : 
-        
-Clonez le repository:
-``` git clone "git@github.com:olelong/42_Webserv.git" repo_git_name ```
-
-Entrez dans le dossier:        
-``` cd repo_git_name ```
-
-Exécutez la commande ``` make ``` pour lancer le serveur.
-
-Lancez l'exécutable ``` ./webserv ```.  
-
-Démarrez votre navigateur google chrome et ensuite tapez l'url : "127.0.0.1:8080"
-
-Ensuite, allez-y maintenant vous pouvez tester notre serveur web !
-
 </br>
 
 ### Le projet est divisé en trois parties :
@@ -522,10 +482,6 @@ Pour conclure, le serveur reçoit des requêtes depuis les sockets des clients. 
 générées prenant en compte les éléments présents dans le fichier de configuration. Et ainsi notre site s'affiche sur le port 8081.
 
 ![image](https://user-images.githubusercontent.com/58531906/188732567-edb2ecfe-4ba8-4025-9e4d-1ef895ecb006.png)
-
-## Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 </br></br>
 </br></br>
